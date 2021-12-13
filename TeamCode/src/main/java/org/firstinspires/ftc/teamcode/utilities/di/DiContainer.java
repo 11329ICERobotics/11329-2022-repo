@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.utilities.di;
 
-import org.apache.commons.lang3.ClassUtils;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -10,44 +8,97 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class DiContainer {/*
-    List<DiRule> rules = new ArrayList<>();
-    HashMap<UUID, Object> objectPool = new HashMap<>();
-
-    protected Object Resolve(Class<?> searchClass, DiContext context) {
-        //Resolve a value using a given context
-    }
-
-    public void Tick() {
-
-    }
-
-    public void Dispose() {
-
-    }
-*/
+public class DiContainer {
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
     public @interface Inject {
         String id() default "";
         boolean optional() default false;
     }
-/*
-    public Object Inject(Object instance) throws IllegalAccessException {
-        DiContext context = new DiContext("", instance.getClass(), instance, "", false, this);
 
+    List<DiRule> rules = new ArrayList<>();
+    HashMap<UUID, Object> objectPool = new HashMap<>();
+
+    public void Initialize() {
+        for (Object objectInstance: objectPool.values()) {
+            if (objectInstance instanceof DiInterfaces.IInitializable) {
+                ((DiInterfaces.IInitializable) objectInstance).Initialize();
+            }
+        }
+    }
+
+    public void Tick() {
+        for (Object objectInstance: objectPool.values()) {
+            if (objectInstance instanceof DiInterfaces.ITickable) {
+                ((DiInterfaces.ITickable) objectInstance).Tick();
+            }
+        }
+    }
+
+    public void Dispose() {
+        for (Object objectInstance: objectPool.values()) {
+            if (objectInstance instanceof DiInterfaces.IDisposable) {
+                ((DiInterfaces.IDisposable) objectInstance).Dispose();
+            }
+        }
+    }
+
+    protected List<Object> ResolveAll(Class<?> searchClass, DiContext context) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        List<Object> values = new ArrayList<>();
+        context.targetClass = searchClass;
+
+        for (DiRule rule: rules) {
+            if (rule.ruleApplies(context)) {
+                values.add(rule.getObjectValue(context));
+            }
+        }
+
+        return values;
+    }
+
+    protected Object Resolve(Class<?> searchClass, DiContext context) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        List<Object> values = ResolveAll(searchClass, context);
+
+        if (values.size() > 1) throw new DiExceptions.MultipleInstancesFoundException();
+        if (values.size() < 1) throw new DiExceptions.InstanceNotFoundException();
+
+        return values.get(0);
+    }
+
+    protected Object Instantiate(Class<?> inClass, DiContext context) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        Constructor<?>[] constructors = inClass.getConstructors();
+        Class<?>[] parameterClasses = constructors[0].getParameterTypes();
+        List<Object> parameterValues = new ArrayList<>();
+
+        context.targetClass = inClass;
+
+        for (Class<?> parameterClass: parameterClasses) {
+            parameterValues.add(Resolve(parameterClass, context));
+        }
+
+        Object instance = constructors[0].newInstance(parameterValues.toArray(new Object[0]));
+
+        return Inject(instance, context);
+    }
+
+    protected Object Inject(Object instance, DiContext context) throws IllegalAccessException, InvocationTargetException, InstantiationException {
         Field[] fields = instance.getClass().getFields();
 
         for (Field field: fields) {
             if (!field.isAnnotationPresent(Inject.class)) continue;
             Inject inject = field.getAnnotation(Inject.class);
 
-            context.id = inject.id();
+            try {
+                context.id = inject.id();
+
+                if (context.id.equals("")) context.id = null;
+            } catch (NullPointerException e) {
+                context.id = null;
+            }
             context.optional = inject.optional();
             context.memberName = field.getName();
 
@@ -57,22 +108,54 @@ public class DiContainer {/*
         return instance;
     }
 
-    public Object Instantiate(Class<?> inClass) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        DiContext context = new DiContext("", inClass, null, "", false, this);
+    public Object Inject(Object instance) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        DiContext context = new DiContext(null, instance.getClass(), instance, "", false, this);
 
-        Constructor<?>[] constructors = inClass.getConstructors();
+        return Inject(instance, context);
+    }
 
-        Class<?>[] parameterClasses = constructors[0].getParameterTypes();
+    public Object Instantiate(Class<?> inClass) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        DiContext context = new DiContext(null, inClass, null, "", false, this);
 
-        List<Object> parameterValues = new ArrayList<>();
+        return Instantiate(inClass, context);
+    }
 
-        for (Class<?> parameterClass: parameterClasses) {
-            parameterValues.add(Resolve(parameterClass, context));
+    public Object Resolve(Class<?> searchClass) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        DiContext context = new DiContext(null, searchClass, null, "", false, this);
+
+        return Resolve(searchClass, context);
+    }
+
+    public Object ResolveId(Class<?> searchClass, String id) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        DiContext context = new DiContext(id, searchClass, null, "", false, this);
+
+        return Resolve(searchClass, context);
+    }
+
+    public List<Object> ResolveAll(Class<?> searchClass) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        DiContext context = new DiContext(null, searchClass, null, "", false, this);
+
+        return ResolveAll(searchClass, context);
+    }
+
+    public Object TryResolve(Class<?> searchClass) {
+        DiContext context = new DiContext(null, searchClass, null, "", false, this);
+
+        try {
+            return Resolve(searchClass, context);
+        } catch (Exception e) {
+            return null;
         }
+    }
 
-        Object instance = constructors[0].newInstance(parameterValues.toArray(new Object[0]));
+    public Object TryResolveId(Class<?> searchClass, String id) {
+        DiContext context = new DiContext(id, searchClass, null, "", false, this);
 
-        return Inject(instance);
+        try {
+            return Resolve(searchClass, context);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public DiRuleBuilder Bind(Class<?> ...inClasses) {
@@ -99,7 +182,7 @@ public class DiContainer {/*
         return diRuleBuilder;
     }
 
-    public DiRuleBuilder BindInterfacesTo(Class<?> inClass) {
+    public DiRuleBuilder BindInterfacesTo(Class<?> inClass) throws IllegalAccessException, InvocationTargetException, InstantiationException {
         DiRuleBuilder diRuleBuilder = new DiRuleBuilder(this);
 
         diRuleBuilder.BindInterfacesTo(inClass);
@@ -107,56 +190,11 @@ public class DiContainer {/*
         return diRuleBuilder;
     }
 
-    public DiRuleBuilder BindInterfacesAndSelfTo(Class<?> inClass) {
+    public DiRuleBuilder BindInterfacesAndSelfTo(Class<?> inClass) throws IllegalAccessException, InvocationTargetException, InstantiationException {
         DiRuleBuilder diRuleBuilder = new DiRuleBuilder(this);
 
         diRuleBuilder.BindInterfacesAndSelfTo(inClass);
 
         return diRuleBuilder;
     }
-
-    public Object Resolve(Class<?> searchClass) throws DiExceptions.InstanceNotFoundException, DiExceptions.MultipleInstancesFoundException, IllegalAccessException, InstantiationException, InvocationTargetException {
-        List<Object> allObjects = ResolveAll(searchClass);
-
-        if (allObjects.size() > 1) throw new DiExceptions.MultipleInstancesFoundException();
-
-        return allObjects.get(0);
-    }
-
-    public Object ResolveId(Class<?> searchClass, String id) throws DiExceptions.InstanceNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException {
-        List<Object> allObjects = ResolveAll(searchClass);
-
-        return allObjects.get(0);
-    }
-
-    public List<Object> ResolveAll(Class<?> searchClass) throws DiExceptions.InstanceNotFoundException, DiExceptions.IncompleteBindingException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        List<Object> allObjects = new ArrayList<>();
-
-        for (DiRule diRule : rules) {
-            if (diRule.targetClass != null || diRule.instanceClass != searchClass) continue;
-
-            allObjects.add(diRule.getObjectValue());
-        }
-
-        if (allObjects.size() <= 0) throw new DiExceptions.InstanceNotFoundException();
-
-        return allObjects;
-    }
-
-    public Object TryResolve(Class<?> searchClass) {
-        try {
-            return this.Resolve(searchClass);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public Object TryResolveId(Class<?> searchClass, String id) {
-        try {
-            return this.ResolveId(searchClass, id);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-*/
 }

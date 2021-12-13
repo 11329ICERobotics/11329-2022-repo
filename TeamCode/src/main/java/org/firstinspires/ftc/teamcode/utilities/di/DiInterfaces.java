@@ -2,12 +2,12 @@ package org.firstinspires.ftc.teamcode.utilities.di;
 
 public class DiInterfaces {
     public interface IInitializable {
-        public void Initialize();
+        void Initialize();
     }
     public interface ITickable {
-        public void Tick();
+        void Tick();
     }
     public interface IDisposable {
-        public void Dispose();
+        void Dispose();
     }
 }

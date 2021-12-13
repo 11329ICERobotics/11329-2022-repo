@@ -1,43 +1,24 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import org.firstinspires.ftc.teamcode.OpModeBase;
+import org.firstinspires.ftc.teamcode.commands.drivetrain.AutoDrive;
+import org.firstinspires.ftc.teamcode.commands.manipulators.AutoArm;
+import org.firstinspires.ftc.teamcode.commands.manipulators.AutoDuckSpinner;
 
-import org.firstinspires.ftc.teamcode.AutoNav;
-import org.firstinspires.ftc.teamcode.HardwareInterface;
+import java.lang.reflect.InvocationTargetException;
 
-import java.util.concurrent.Callable;
+public abstract class AutoBase extends OpModeBase {
+    // PLS IMPLEMENT A PROPER PARSER SO THAT WAY YESN'T PAIN
+    //public abstract void Run();
 
-public abstract class AutoBase extends OpMode {
-    public abstract void Run();
-
-    HardwareInterface hardwareInterface;
-    AutoNav autoNav;
-
-    boolean opmodeActive = true;
-
-    public Callable<Boolean> opModeActiveCallable = new Callable<Boolean>() {
-        public Boolean call() {
-            return opmodeActive;
-        }
-    };
+    public AutoDrive autoDrive;
+    public AutoArm autoArm;
+    public AutoDuckSpinner autoDuckSpinner;
 
     @Override
-    public void init() {
-        hardwareInterface = new HardwareInterface(hardwareMap);
-        autoNav = new AutoNav(opModeActiveCallable, telemetry, hardwareInterface);
-    }
-
-    @Override
-    public void start() {
-        Run();
-    }
-
-    @Override
-    public void loop() {}
-
-    @Override
-    public void stop() {
-        opmodeActive = false;
+    public void InstallLower() throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        autoDrive = (AutoDrive) Container.Instantiate(AutoDrive.class);
+        autoArm = (AutoArm) Container.Instantiate(AutoArm.class);
+        autoDuckSpinner = (AutoDuckSpinner) Container.Instantiate(AutoDuckSpinner.class);
     }
 }

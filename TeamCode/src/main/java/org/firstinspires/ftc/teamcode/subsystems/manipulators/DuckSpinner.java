@@ -1,22 +1,14 @@
-package org.firstinspires.ftc.teamcode.utilities.manipulators;
+package org.firstinspires.ftc.teamcode.subsystems.manipulators;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.utilities.di.DiContainer;
 import org.firstinspires.ftc.teamcode.utilities.di.DiInterfaces;
-import org.firstinspires.ftc.teamcode.utilities.RobotConfig;
 
-public class DuckSpinner implements DiInterfaces.IInitializable, DiInterfaces.ITickable, DiInterfaces.IDisposable {
+public class DuckSpinner implements DiInterfaces.IInitializable, DiInterfaces.IDisposable {
     @DiContainer.Inject(id="spinnerMotor")
     public DcMotor spinnerMotor;
-
-    @DiContainer.Inject(id="gamepad1")
-    public Gamepad gamepad1;
-
-    @DiContainer.Inject(id="gamepad2")
-    public Gamepad gamepad2;
 
     @Override
     public void Initialize() {
@@ -25,12 +17,11 @@ public class DuckSpinner implements DiInterfaces.IInitializable, DiInterfaces.IT
     }
 
     @Override
-    public void Tick() {
-        spinnerMotor.setPower(((gamepad1.circle || gamepad2.circle) ? -RobotConfig.spinnerSpeed : 0));
-    }
-
-    @Override
     public void Dispose() {
         spinnerMotor.setPower(0);
+    }
+
+    public void Spin(double power) {
+        spinnerMotor.setPower(power);
     }
 }

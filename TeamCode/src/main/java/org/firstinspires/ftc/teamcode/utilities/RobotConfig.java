@@ -1,16 +1,22 @@
 package org.firstinspires.ftc.teamcode.utilities;
 
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.teamcode.utilities.di.DiContainer;
-
 public class RobotConfig {
-    public static String frontLeftMotorName = "";
-    public static String frontRightMotorName = "";
-    public static String backLeftMotorName = "";
-    public static String backRightMotorName = "";
+    public static String frontLeftMotorName = "frontLeft";
+    public static String frontRightMotorName = "frontRight";
+    public static String backLeftMotorName = "backLeft";
+    public static String backRightMotorName = "backRight";
+
+    public static String armMotorName = "armMotor";
+
+    public static String intakeMotorName = "wristMotor";
+
+    public static String spinnerMotorName = "spinnerMotor";
 
     public static double armSpeed = 1;
     public static double wristSpeed = 0.75;
-    public static double spinnerSpeed = 0.5;
+
+    public static double spinnerSpeed = 0.75;
+
+    public static double fastDriveSpeed = 0.75;
+    public static double slowDriveSpeed = 0.5;
 }

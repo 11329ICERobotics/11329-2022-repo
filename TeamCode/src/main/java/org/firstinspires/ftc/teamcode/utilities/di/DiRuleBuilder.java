@@ -1,72 +1,143 @@
 package org.firstinspires.ftc.teamcode.utilities.di;
-/*
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class DiRuleBuilder {
-    private DiContainer container;
+    private final DiContainer container;
+    private final List<DiRule> targetRules = new ArrayList<>();
 
-    private List<DiRule> targetRules = new ArrayList<>();
+    private Boolean bindDone = false;
+    private Boolean resolutionSet = false;
 
-    protected DiRuleBuilder(DiContainer container) {
-        this.container = container;
+    private Class<?> target = null;
+
+    protected DiRuleBuilder(DiContainer containerIn) {
+        container = containerIn;
     }
 
-
     // User Facing
-
     public DiRuleBuilder Bind(Class<?> ...inClasses) {
-        // Bind Source Classes
+        if (bindDone) throw new DiExceptions.RuleBuilderException();
+
+        for (Class<?> inClass: inClasses) {
+            targetRules.add(new DiRule(container, inClass));
+        }
+
         return this;
     }
 
     public DiRuleBuilder BindInstance(Object instance) {
-        // Bind Instance
+        BindInstances(instance);
+
         return this;
     }
 
     public DiRuleBuilder BindInstances(Object ...instances) {
-        // Bind Instances
+        if (bindDone || resolutionSet) throw new DiExceptions.RuleBuilderException();
+
+        bindDone = true;
+        resolutionSet = true;
+
+        for (Object instance: instances) {
+            DiRule rule = new DiRule(container, instance.getClass());
+            targetRules.add(rule);
+        }
+
         return this;
     }
 
-    public DiRuleBuilder BindInterfacesTo(Class<?> inClass) {
-        // Bind all implemented interfaces to the class
+    public DiRuleBuilder BindInterfacesTo(Class<?> inClass) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        Bind(inClass.getInterfaces());
+
+        To(inClass);
+
+        AsSingle();
+
         return this;
     }
 
-    public DiRuleBuilder BindInterfacesAndSelfTo(Class<?> inClass) {
-        // Bind all implemented interfaces and self to the class
+    public DiRuleBuilder BindInterfacesAndSelfTo(Class<?> inClass) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        List<Class<?>> classes = Arrays.asList(inClass.getInterfaces());
+        classes.add(inClass);
+
+        Bind(classes.toArray(new Class<?>[0]));
+
+        To(inClass);
+
+        AsSingle();
+
         return this;
     }
 
-    public DiRuleBuilder AsSingle() {
-        // Create new Single Instance
+    public DiRuleBuilder AsSingle() throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        if (resolutionSet) throw new DiExceptions.RuleBuilderException();
+
+        resolutionSet = true;
+
+        if (target != null) {
+            FromInstance(container.Instantiate(target));
+        } else {
+            for (DiRule rule: targetRules) {
+                Object instance = container.Instantiate(target);
+                UUID uuid = UUID.randomUUID();
+
+                container.objectPool.put(uuid, instance);
+
+                rule.setupReturn(uuid);
+            }
+        }
+
         return this;
     }
 
     public DiRuleBuilder AsTransient() {
-        // Create new Transient Instance
+        if (resolutionSet) throw new DiExceptions.RuleBuilderException();
+
+        resolutionSet = true;
+
+        if (target != null) {
+            for (DiRule rule: targetRules) {
+                rule.setupCreate(target);
+            }
+        } else {
+            for (DiRule rule: targetRules) {
+                rule.setupCreate(rule.targetClass);
+            }
+        }
+
         return this;
     }
 
-    public DiRuleBuilder AsCached() {
-        // Create new Transient Instance
+    /*public DiRuleBuilder AsCached() {
+        // Create new Cached Instances
         return this;
-    }
-
-    public DiRuleBuilder FromResolve() {
-        // Create new Cached Instance
-        return this;
-    }
+    }*/
 
     public DiRuleBuilder To(Class<?> inClass) {
-        // Bind classes to use inClass
+        if (target != null) throw new DiExceptions.RuleBuilderException();
+
+        target = inClass;
+
         return this;
     }
 
     public DiRuleBuilder FromInstance(Object instance) {
-        // Bind classes to use instance
+        if (resolutionSet) throw new DiExceptions.RuleBuilderException();
+
+        resolutionSet = true;
+
+        UUID uuid = UUID.randomUUID();
+
+        container.objectPool.put(uuid, instance);
+
+        for (DiRule rule: targetRules) {
+            rule.setupReturn(uuid);
+        }
+
         return this;
     }
 
@@ -82,7 +153,7 @@ public class DiRuleBuilder {
         for (DiRule rule: targetRules) {
             rule.conditions.add(new DiCondition() {
                 @Override
-                public boolean check(DiContext context) {
+                public Boolean check(DiContext context) {
                     return context.targetClass == inClass;
                 }
             });
@@ -91,21 +162,16 @@ public class DiRuleBuilder {
         return this;
     }
 
-    public DiRuleBuilder WithId(String id) throws DiExceptions.IDAlreadyTakenException {
-        if (container.takenIDs.contains(id)) throw new DiExceptions.IDAlreadyTakenException();
-
-        container.takenIDs.add(id);
-
-        this.id = id;
-
-        conditions.add(new DiCondition() {
-            @Override
-            public boolean check(DiContext context) {
-                return context.id == id;
-            }
-        });
+    public DiRuleBuilder WithId(String id) {
+        for (DiRule rule: targetRules) {
+            rule.conditions.add(new DiCondition() {
+                @Override
+                public Boolean check(DiContext context) {
+                    return context.id.equals(id);
+                }
+            });
+        }
 
         return this;
     }
 }
-*/
