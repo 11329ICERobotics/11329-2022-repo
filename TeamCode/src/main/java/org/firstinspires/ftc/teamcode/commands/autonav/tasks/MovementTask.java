@@ -24,6 +24,14 @@ public class MovementTask extends Task {
         this.speed = Math.max(-1.0f, Math.min(1.0f, speed));
     }
 
+    public MovementTask(long millis, float clockwiseRotationPower, float speed) {
+        this.millis = millis;
+        this.forwards = 0;
+        this.left = 0;
+        this.clockwise = clockwiseRotationPower;
+        this.speed = Math.max(-1.0f, Math.min(1.0f, speed));
+    }
+
     @Override
     public void Begin() {
         now = java.lang.System.currentTimeMillis();

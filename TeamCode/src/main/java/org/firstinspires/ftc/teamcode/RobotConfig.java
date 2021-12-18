@@ -23,7 +23,7 @@ public class RobotConfig {
     public static double intakeSpeed = 0.5;
     public static double outtakeSpeed = 0.45;
 
-    public static double spinnerSpeed = 0.8;
+    public static double spinnerSpeed = 0.9;
 
     public static double fastDriveSpeed = 0.75;
     public static double slowDriveSpeed = 0.5;
@@ -44,5 +44,5 @@ public class RobotConfig {
         public static double backThird = 0;
     }
 
-    public static long msForOneDuckSpin = 2500;
+    public static long msForOneDuckSpin = 3000;
 }

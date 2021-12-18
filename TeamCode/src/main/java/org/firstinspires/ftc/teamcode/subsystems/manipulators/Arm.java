@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.subsystems.manipulators;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.teamcode.utilities.di.DiContainer;
 import org.firstinspires.ftc.teamcode.utilities.di.DiInterfaces;
@@ -13,6 +13,9 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
 
     @DiContainer.Inject(id="intakeMotor")
     public DcMotor intakeMotor;
+
+    @DiContainer.Inject(id="armButton")
+    public TouchSensor backLimit;
 
     @Override
     public void Initialize() {
@@ -47,7 +50,10 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
 
     // REMOVE THIS AND FIX IT YOU DUMMY
     public void RunArmPower(double power) {
-        armMotor.setPower(power);
+        double newPower = power;
+        if (newPower < 0 && BackLimitBeenHit()) newPower = 0;
+
+        armMotor.setPower(newPower);
     }
 
     public boolean IsArmDoneMoving() {
@@ -64,5 +70,9 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
 
     public double GetRealAngle() {
         return armMotor.getCurrentPosition();
+    }
+
+    public boolean BackLimitBeenHit() {
+        return backLimit.isPressed();
     }
 }

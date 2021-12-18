@@ -5,11 +5,19 @@ import org.firstinspires.ftc.teamcode.subsystems.manipulators.DuckSpinner;
 
 public class DuckSpinTask extends Task {
     long millis;
+    boolean keepMode = false;
+    boolean keepState = false;
 
     long endTime;
 
     public DuckSpinTask(long millis) {
         this.millis = millis;
+    }
+    public DuckSpinTask(boolean keepState) {
+        this.millis = 0;
+
+        keepMode = true;
+        this.keepState = keepState;
     }
 
     @Override
@@ -19,6 +27,11 @@ public class DuckSpinTask extends Task {
 
     @Override
     public boolean Execute() {
+        if (keepMode) {
+            autoNav.duckSpinner.Spin(keepState);
+            return true;
+        }
+
         autoNav.duckSpinner.Spin(true);
 
         return (endTime < System.currentTimeMillis());
@@ -26,6 +39,11 @@ public class DuckSpinTask extends Task {
 
     @Override
     public void Stop() {
+        if (keepMode) {
+            autoNav.duckSpinner.Spin(keepState);
+            return;
+        }
+
         autoNav.duckSpinner.Spin(false);
     }
 }
