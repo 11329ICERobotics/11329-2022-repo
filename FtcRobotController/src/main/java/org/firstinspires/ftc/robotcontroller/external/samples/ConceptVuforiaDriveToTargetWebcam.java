@@ -3,7 +3,7 @@ package org.firstinspires.ftc.robotcontroller.external.samples;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
@@ -72,8 +72,8 @@ public class ConceptVuforiaDriveToTargetWebcam extends LinearOpMode
     OpenGLMatrix targetPose     = null;
     String targetName           = "";
 
-    private DcMotor leftDrive   = null;
-    private DcMotor rightDrive  = null;
+    private DcMotorEx leftDrive   = null;
+    private DcMotorEx rightDrive  = null;
 
     @Override public void runOpMode()
     {
@@ -108,13 +108,13 @@ public class ConceptVuforiaDriveToTargetWebcam extends LinearOpMode
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftDrive  = hardwareMap.get(DcMotor.class, "left_drive");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+        leftDrive  = hardwareMap.get(DcMotorEx.class, "left_drive");
+        rightDrive = hardwareMap.get(DcMotorEx.class, "right_drive");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
-        leftDrive.setDirection(DcMotor.Direction.FORWARD);
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftDrive.setDirection(DcMotorEx.Direction.FORWARD);
+        rightDrive.setDirection(DcMotorEx.Direction.REVERSE);
 
         telemetry.addData(">", "Press Play to start");
         telemetry.update();

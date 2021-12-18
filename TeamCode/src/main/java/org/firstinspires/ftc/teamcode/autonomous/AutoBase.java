@@ -1,24 +1,49 @@
 package org.firstinspires.ftc.teamcode.autonomous;
 
-import org.firstinspires.ftc.teamcode.OpModeBase;
-import org.firstinspires.ftc.teamcode.commands.drivetrain.AutoDrive;
-import org.firstinspires.ftc.teamcode.commands.manipulators.AutoArm;
-import org.firstinspires.ftc.teamcode.commands.manipulators.AutoDuckSpinner;
+import com.qualcomm.ftccommon.SoundPlayer;
+
+import org.firstinspires.ftc.teamcode.utilities.OpModeBase;
+import org.firstinspires.ftc.teamcode.commands.autonav.AutoNav;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AutoBase extends OpModeBase {
     // PLS IMPLEMENT A PROPER PARSER SO THAT WAY YESN'T PAIN
-    //public abstract void Run();
+    public abstract void Run();
 
-    public AutoDrive autoDrive;
-    public AutoArm autoArm;
-    public AutoDuckSpinner autoDuckSpinner;
+    public AutoNav autoNav;
+
+    public int audioClipID;
 
     @Override
     public void InstallLower() throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        autoDrive = (AutoDrive) Container.Instantiate(AutoDrive.class);
-        autoArm = (AutoArm) Container.Instantiate(AutoArm.class);
-        autoDuckSpinner = (AutoDuckSpinner) Container.Instantiate(AutoDuckSpinner.class);
+        Container.Bind(AutoNav.class).AsSingle();
+
+        audioClipID = hardwareMap.appContext.getResources().getIdentifier("funny", "raw", hardwareMap.appContext.getPackageName());
+        //SoundPlayer.getInstance().setMasterVolume(1);
+        SoundPlayer.getInstance().preload(hardwareMap.appContext, audioClipID);
+
+        autoNav = (AutoNav) Container.Resolve(AutoNav.class);
+
+        //autoNav = (AutoNav) Container.Instantiate(AutoNav.class);
+
+        //Run();
+    }
+
+    @Override
+    public void start() {
+        telemetry.log().add("start start");
+
+        //audioClipID = hardwareMap.appContext.getResources().getIdentifier("funny", "raw", hardwareMap.appContext.getPackageName());
+        //SoundPlayer.getInstance().setMasterVolume(1);
+        SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, audioClipID);
+
+        telemetry.log().add("ready start");
+
+        Run();
+
+        telemetry.log().add("done start");
     }
 }

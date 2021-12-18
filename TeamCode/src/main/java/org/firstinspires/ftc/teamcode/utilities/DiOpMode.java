@@ -2,12 +2,13 @@ package org.firstinspires.ftc.teamcode.utilities;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.utilities.di.DiContainer;
 
 import java.lang.reflect.InvocationTargetException;
 
 public abstract class DiOpMode extends OpMode {
-    public DiContainer Container;
+    public DiContainer Container = new DiContainer();
 
     public abstract void Install() throws IllegalAccessException, InstantiationException, InvocationTargetException;
 

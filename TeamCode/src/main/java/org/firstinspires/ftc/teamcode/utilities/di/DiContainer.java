@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.utilities.di;
 
+import org.firstinspires.ftc.teamcode.utilities.DiOpMode;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -49,7 +51,7 @@ public class DiContainer {
 
     protected List<Object> ResolveAll(Class<?> searchClass, DiContext context) throws IllegalAccessException, InvocationTargetException, InstantiationException {
         List<Object> values = new ArrayList<>();
-        context.targetClass = searchClass;
+        context.memberClass = searchClass;
 
         for (DiRule rule: rules) {
             if (rule.ruleApplies(context)) {
@@ -101,45 +103,46 @@ public class DiContainer {
             }
             context.optional = inject.optional();
             context.memberName = field.getName();
+            context.memberClass = field.getType();
 
-            field.set(instance, Resolve(instance.getClass(), context));
+            field.set(instance, Resolve(field.getType(), context));
         }
 
         return instance;
     }
 
     public Object Inject(Object instance) throws IllegalAccessException, InstantiationException, InvocationTargetException {
-        DiContext context = new DiContext(null, instance.getClass(), instance, "", false, this);
+        DiContext context = new DiContext(null, instance.getClass(), instance, "", null, false, this);
 
         return Inject(instance, context);
     }
 
     public Object Instantiate(Class<?> inClass) throws IllegalAccessException, InstantiationException, InvocationTargetException {
-        DiContext context = new DiContext(null, inClass, null, "", false, this);
+        DiContext context = new DiContext(null, inClass, null, "", null, false, this);
 
         return Instantiate(inClass, context);
     }
 
     public Object Resolve(Class<?> searchClass) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        DiContext context = new DiContext(null, searchClass, null, "", false, this);
+        DiContext context = new DiContext(null, searchClass, null, "", null, false, this);
 
         return Resolve(searchClass, context);
     }
 
     public Object ResolveId(Class<?> searchClass, String id) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        DiContext context = new DiContext(id, searchClass, null, "", false, this);
+        DiContext context = new DiContext(id, searchClass, null, "", null, false, this);
 
         return Resolve(searchClass, context);
     }
 
     public List<Object> ResolveAll(Class<?> searchClass) throws IllegalAccessException, InstantiationException, InvocationTargetException {
-        DiContext context = new DiContext(null, searchClass, null, "", false, this);
+        DiContext context = new DiContext(null, searchClass, null, "", null, false, this);
 
         return ResolveAll(searchClass, context);
     }
 
     public Object TryResolve(Class<?> searchClass) {
-        DiContext context = new DiContext(null, searchClass, null, "", false, this);
+        DiContext context = new DiContext(null, searchClass, null, "", null, false, this);
 
         try {
             return Resolve(searchClass, context);
@@ -149,7 +152,7 @@ public class DiContainer {
     }
 
     public Object TryResolveId(Class<?> searchClass, String id) {
-        DiContext context = new DiContext(id, searchClass, null, "", false, this);
+        DiContext context = new DiContext(id, searchClass, null, "",null, false, this);
 
         try {
             return Resolve(searchClass, context);

@@ -2,8 +2,9 @@ package org.firstinspires.ftc.teamcode.commands.manipulators;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.subsystems.manipulators.DuckSpinner;
-import org.firstinspires.ftc.teamcode.utilities.RobotConfig;
+import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 import org.firstinspires.ftc.teamcode.utilities.di.DiContainer;
 import org.firstinspires.ftc.teamcode.utilities.di.DiInterfaces;
@@ -19,11 +20,14 @@ public class TeleopDuckSpinner implements DiInterfaces.ITickable {
     public Gamepad gamepad2;
 
     @DiContainer.Inject()
-    public RobotSide side;
+    public Telemetry telemetry;
 
     @Override
     public void Tick() {
-        double spinnerSpeed = ((side == RobotSide.RED) ? -RobotConfig.spinnerSpeed : RobotConfig.spinnerSpeed);
-        duckSpinner.Spin((gamepad1.circle ? spinnerSpeed : 0) + (gamepad1.cross ? -spinnerSpeed : 0));
+        boolean spin = gamepad1.circle;
+
+        telemetry.addData("TeleopDuckSpinner Status", "Spinning?: " + spin);
+
+        duckSpinner.Spin(spin);
     }
 }

@@ -94,7 +94,7 @@ public class ConceptMotorBulkRead extends LinearOpMode {
 
         int cycles;
 
-        // Important Step 1:  Make sure you use DcMotorEx when you instantiate your motors.
+        // Important Step 1:  Make sure you use DcMotorExEx when you instantiate your motors.
         m1 = hardwareMap.get(DcMotorEx.class, "m1");  // Configure the robot to use these 4 motor names,
         m2 = hardwareMap.get(DcMotorEx.class, "m2");  // or change these strings to match your existing Robot Configuration.
         m3 = hardwareMap.get(DcMotorEx.class, "m3");

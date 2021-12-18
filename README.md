@@ -577,7 +577,7 @@ Changes include:
     - Support for REV Robotics Blinkin LED Controller.
     - Support for REV Robotics 2m Distance Sensor.
     - Added support for a REV Touch Sensor (no longer have to configure as a generic digital device).
-    - Added blocks for DcMotorEx methods.
+    - Added blocks for DcMotorExEx methods.
         + These are enhanced methods that you can use when supported by the motor controller hardware.
 	+ The REV Robotics Expansion Hub supports these enhanced methods.
 	+ Enhanced methods include methods to get/set motor velocity (in encoder pulses per second), get/set PIDF coefficients, etc..
@@ -750,7 +750,7 @@ Additional Notes Regarding Version 3.00 (built on 17.04.13)
 In addition to the release changes listed below (see section labeled "Version 3.00 (built on 17.04.013)"), version 3.00 has the following important changes:
 
 1. Version 3.00 software uses a new version of the FTC Robocol (robot protocol).  If you upgrade to v3.0 on the Robot Controller and/or Android Studio side, you must also upgrade the Driver Station software to match the new Robocol.
-2. Version 3.00 software removes the setMaxSpeed and getMaxSpeed methods from the DcMotor class.  If you have an op mode that formerly used these methods, you will need to remove the references/calls to these methods.  Instead, v3.0 provides the max speed information through the use of motor profiles that are selected by the user during robot configuration.
+2. Version 3.00 software removes the setMaxSpeed and getMaxSpeed methods from the DcMotorEx class.  If you have an op mode that formerly used these methods, you will need to remove the references/calls to these methods.  Instead, v3.0 provides the max speed information through the use of motor profiles that are selected by the user during robot configuration.
 3. Version 3.00 software currently does not have a mechanism to disable extra i2c sensors.  We hope to re-introduce this function with a release in the near future.
 
 **************************************************************************************
@@ -791,7 +791,7 @@ Changes include:
     - Detects and alerts when I2C device disconnect.
 
 ## Version 2.62 (built on 17.01.07)
-  * Added null pointer check before calling modeToByte() in finishModeSwitchIfNecessary method for ModernRoboticsUsbDcMotorController class.
+  * Added null pointer check before calling modeToByte() in finishModeSwitchIfNecessary method for ModernRoboticsUsbDcMotorExController class.
   * Changes to enhance Modern Robotics USB protocol robustness.
 
 ## Version 2.61 (released on 16.12.19)
@@ -955,8 +955,8 @@ Changes include:
  * Changes in the Android SDK, JDK and build tool requirements (minsdk=19, java 1.7, build tools 23.0.3).
  * Standardized units in analog input.
  * Cleaned up code for existing analog sensor classes.
- * setChannelMode and getChannelMode were REMOVED from the DcMotorController class.  This is important - we no longer set the motor modes through the motor controller.
- * setMode and getMode were added to the DcMotor class.
+ * setChannelMode and getChannelMode were REMOVED from the DcMotorExController class.  This is important - we no longer set the motor modes through the motor controller.
+ * setMode and getMode were added to the DcMotorEx class.
  * ContinuousRotationServo class has been added to the FTC SDK.
  * Range.clip() method has been overloaded so it can support this operation for int, short and byte integers.
  * Some changes have been made (new methods added) on how a user can access items from the hardware map.
@@ -994,7 +994,7 @@ Changes include:
     - runOpMode() (for a LinearOpMode) is now decoupled from the system's hardware read/write thread.
     - loop() (for an OpMode) is now decoupled from the system's hardware read/write thread.
     - Methods are synchronous.
-    - For example, if you call setMode(DcMotorController.RunMode.RESET_ENCODERS) for a motor, the encoder is guaranteed to be reset when the method call is complete.
+    - For example, if you call setMode(DcMotorExController.RunMode.RESET_ENCODERS) for a motor, the encoder is guaranteed to be reset when the method call is complete.
     - For legacy module (NXT compatible), user no longer has to toggle between read and write modes when reading from or writing to a legacy device.
  * Changes made to enhance reliability/robustness during ESD event.
  * Changes made to make code thread safe.
@@ -1080,7 +1080,7 @@ Changes include:
   - Example MRGyroTest.java op mode included.
  * Improved error messages
   - More descriptive error messages for exceptions in user code.
- * Updated DcMotor API
+ * Updated DcMotorEx API
  * Enable read mode on new address in setI2cAddress
  * Fix so that driver station app resets the gamepads when switching op modes.
  * USB-related code changes to make USB comm more responsive and to display more explicit error messages.
@@ -1099,7 +1099,7 @@ Changes include:
  * Correctly handle I2C Address change in all color sensors
  * Updated/cleaned up op modes.
   - Updated comments in LinearI2cAddressChange.java example op mode.
-  - Replaced the calls to "setChannelMode" with "setMode" (to match the new of the DcMotor  method).
+  - Replaced the calls to "setChannelMode" with "setMode" (to match the new of the DcMotorEx  method).
   - Removed K9AutoTime.java op mode.
   - Added MRGyroTest.java op mode (demonstrates how to use MR Gyro Sensor).
   - Added MRRGBExample.java op mode (demonstrates how to use MR Color Sensor).

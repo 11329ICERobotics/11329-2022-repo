@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.utilities.di;
 
+import org.firstinspires.ftc.teamcode.utilities.DiOpMode;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +26,10 @@ public class DiRuleBuilder {
         if (bindDone) throw new DiExceptions.RuleBuilderException();
 
         for (Class<?> inClass: inClasses) {
-            targetRules.add(new DiRule(container, inClass));
+            DiRule rule = new DiRule(container, inClass);
+
+            targetRules.add(rule);
+            container.rules.add(rule);
         }
 
         return this;
@@ -43,8 +48,16 @@ public class DiRuleBuilder {
         resolutionSet = true;
 
         for (Object instance: instances) {
+            UUID uuid = UUID.randomUUID();
+
+            container.objectPool.put(uuid, instance);
+
             DiRule rule = new DiRule(container, instance.getClass());
+
+            rule.setupReturn(uuid);
+
             targetRules.add(rule);
+            container.rules.add(rule);
         }
 
         return this;
@@ -82,7 +95,7 @@ public class DiRuleBuilder {
             FromInstance(container.Instantiate(target));
         } else {
             for (DiRule rule: targetRules) {
-                Object instance = container.Instantiate(target);
+                Object instance = container.Instantiate(rule.targetClass);
                 UUID uuid = UUID.randomUUID();
 
                 container.objectPool.put(uuid, instance);

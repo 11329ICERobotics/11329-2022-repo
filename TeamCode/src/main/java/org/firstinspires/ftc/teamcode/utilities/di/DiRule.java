@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.utilities.di;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.utilities.DiOpMode;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +39,12 @@ public class DiRule {
     }
 
     protected boolean ruleApplies(DiContext context) {
-        if (context.targetClass != targetClass) return false;
+        boolean canAssignContextToTarget = context.memberClass.isAssignableFrom(targetClass);
+        boolean canAssignTargetToContext = targetClass.isAssignableFrom(context.memberClass);
+
+        if (!(canAssignContextToTarget || canAssignTargetToContext)) return false;
+
+        if (conditions.size() < 1) return true;
 
         boolean applies = true;
 
@@ -58,6 +66,7 @@ public class DiRule {
             case Return:
                 if (targetObject != null) {
                     Object instance = container.objectPool.get(targetObject);
+
                     if (instance != null) return instance;
                 }
                 break;

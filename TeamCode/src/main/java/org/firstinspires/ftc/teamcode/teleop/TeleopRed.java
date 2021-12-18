@@ -8,6 +8,6 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 public class TeleopRed extends TeleopBase {
     @Override
     public RobotSide GetSide() {
-        return RobotSide.RED;
+        return RobotSide.Red;
     }
 }

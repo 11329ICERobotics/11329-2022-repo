@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.subsystems.drivetrain;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.utilities.di.DiContainer;
 import org.firstinspires.ftc.teamcode.utilities.di.DiInterfaces;
 
@@ -21,19 +23,23 @@ public class Drivetrain implements DiInterfaces.IInitializable, DiInterfaces.IDi
 
     @Override
     public void Initialize() {
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //frontLeftMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //frontRightMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //backLeftMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //backRightMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
@@ -46,7 +52,7 @@ public class Drivetrain implements DiInterfaces.IInitializable, DiInterfaces.IDi
         backRightMotor.setPower(0);
     }
 
-    public void TankDrive(float leftPower, float rightPower) {
+    public void TankDrive(double leftPower, double rightPower) {
         frontRightMotor.setPower(-leftPower);
         backRightMotor.setPower(-leftPower);
         frontLeftMotor.setPower(rightPower);
@@ -54,11 +60,15 @@ public class Drivetrain implements DiInterfaces.IInitializable, DiInterfaces.IDi
     }
 
     // rotational: + couter clockwise, - clockwise
-    public void MecanumDrive(double vertical, double horizontal, double rotational, double maxSpeed) {
-        frontRightMotor.setPower((vertical + horizontal - rotational) * maxSpeed);
-        backRightMotor.setPower((vertical - horizontal - rotational) * maxSpeed);
-        frontLeftMotor.setPower(-(vertical + horizontal + rotational) * maxSpeed);
-        backLeftMotor.setPower(-(vertical - horizontal + rotational) * maxSpeed);
+    public void MecanumDrive(double vertical, double horizontal, double clockwise, double maxSpeed) {
+        frontRightMotor.setPower((-clockwise + horizontal + vertical) * maxSpeed);
+        backRightMotor.setPower((-clockwise - horizontal + vertical) * maxSpeed);
+        frontLeftMotor.setPower(-(-clockwise + horizontal - vertical) * maxSpeed);
+        backLeftMotor.setPower(-(-clockwise - horizontal - vertical) * maxSpeed);
+    }
+
+    public void Stop() {
+        TankDrive(0, 0);
     }
 
     public double powerCurve(double input) {
