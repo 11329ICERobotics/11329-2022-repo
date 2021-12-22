@@ -1,36 +1,83 @@
 package org.firstinspires.ftc.teamcode.subsystems.manipulators;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.robot.Robot;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.utilities.di.DiContainer;
 import org.firstinspires.ftc.teamcode.utilities.di.DiInterfaces;
 
 public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable, DiInterfaces.IDisposable {
     @DiContainer.Inject(id="armMotor")
-    public DcMotor armMotor;
+    public DcMotorEx armMotor;
 
     @DiContainer.Inject(id="intakeMotor")
-    public DcMotor intakeMotor;
+    public DcMotorEx intakeMotor;
 
     @DiContainer.Inject(id="armButton")
     public TouchSensor backLimit;
 
+    @DiContainer.Inject(id="intakeRelease")
+    public Servo intakeRelease;
+
+    @DiContainer.Inject
+    public Telemetry telemetry;
+
+    public boolean resettingArm = false;
+    public int targetPosition = RobotConfig.ArmPresets.startingConfig;
+    public boolean runToTarget = true;
+    public double nonTargetPower = 0;
+
     @Override
     public void Initialize() {
-        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //armMotor.setTargetPosition(0);
+        //armMotor.setPower(-1);
+        //armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        armMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         armMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        armMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        //armMotor.setVelocityPIDFCoefficients(9.5, 0, 0, 0);
 
-        intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intakeMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        intakeMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
     }
 
     @Override
     public void Tick() {
+        if (runToTarget) {
+            if (!IsArmDoneMoving()) {
+                armMotor.setPower(Math.copySign(GetArmPower(), GetArmError()));
+            } else {
+                armMotor.setPower(0);
+            }
 
+            if (BackLimitBeenHit()) {
+                if (targetPosition < 0) targetPosition = 0;
+
+                if (resettingArm) {
+                    armMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+                    //armMotor.setTargetPosition(0);
+                    targetPosition = 0;
+                    //armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+                    armMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+                    resettingArm = false;
+                    //armMotor.setPower(-1);
+                }
+            }
+        } else {
+            if (BackLimitBeenHit() && nonTargetPower < 0) nonTargetPower = 0;
+
+            armMotor.setPower(nonTargetPower);
+            targetPosition = GetRealAngle();
+        }
+
+        //if (!resettingArm) armMotor.setTargetPosition(targetPosition);
     }
 
     @Override
@@ -38,37 +85,63 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
         armMotor.setPower(0);
     }
 
-    public void Run(double armPosition, double intakeSpeed) {
+    public void Run(int armPosition, double intakeSpeed) {
         RunArm(armPosition);
         RunIntake(intakeSpeed);
     }
 
-    public void RunArm(double armPosition) {
-        //write positioning code
+    public void RunArm(int armPosition) {
+        if (resettingArm) return;
 
+        targetPosition = armPosition;
     }
 
-    // REMOVE THIS AND FIX IT YOU DUMMY
-    public void RunArmPower(double power) {
-        double newPower = power;
-        if (newPower < 0 && BackLimitBeenHit()) newPower = 0;
+    public void ZeroArm() {
+        resettingArm = true;
+        //armMotor.setPower(-0.5);
+        //armMotor.setTargetPosition(-99999);
+        targetPosition = -99999;
+    }
 
-        armMotor.setPower(newPower);
+    public void MoveServo(boolean block) {
+        if (block) intakeRelease.setPosition(RobotConfig.intakeReleaseBlockAngle);
+        else intakeRelease.setPosition(RobotConfig.intakeReleaseLeaveAngle);
     }
 
     public boolean IsArmDoneMoving() {
-        return true;
+        return Math.abs(GetArmError()) < 0.01 * (RobotConfig.maxArmAngle - RobotConfig.minArmAngle); //armMotor.getTargetPositionTolerance();
+    }
+
+    public double GetArmError() {
+        return targetPosition - GetRealAngle();
+    }
+
+    public void OverridePositionalControl(boolean doit) {
+        runToTarget = !doit;
+    }
+
+    public void OverridePower(double power) {
+        nonTargetPower = power;
     }
 
     public void RunIntake(double intakeSpeed) {
         intakeMotor.setPower(intakeSpeed);
     }
 
+    public double GetArmPower() {
+        if ((GetRealAngle() > 1000 && targetPosition < GetRealAngle()) ||
+            (GetRealAngle() < 1000 && targetPosition > GetRealAngle())) {
+            return 1.0;
+        } else {
+            return 0.75;
+        }
+    }
+
     public void Stop() {
         Run(0, 0);
     }
 
-    public double GetRealAngle() {
+    public int GetRealAngle() {
         return armMotor.getCurrentPosition();
     }
 

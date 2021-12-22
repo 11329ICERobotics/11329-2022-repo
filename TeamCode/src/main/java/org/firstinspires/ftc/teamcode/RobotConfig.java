@@ -19,30 +19,35 @@ public class RobotConfig {
 
     public static String armButtonName = "armButton";
 
+    public static String intakeReleaseServoName = "intakeRelease";
+
     public static double armSpeed = 1;//0.35;
     public static double intakeSpeed = 0.5;
-    public static double outtakeSpeed = 0.45;
+    public static double outtakeSpeed = 0.35;
 
-    public static double spinnerSpeed = 0.9;
+    public static double spinnerSpeed = 0.85;
 
     public static double fastDriveSpeed = 0.75;
     public static double slowDriveSpeed = 0.5;
 
-    public static double minArmAngle = 0;
-    public static double maxArmAngle = 180;
+    public static int minArmAngle = 0;
+    public static int maxArmAngle = 2070;
+
+    public static double intakeReleaseBlockAngle = 0;
+    public static double intakeReleaseLeaveAngle = 1;
 
     public static class ArmPresets {
-        public static double intake = 0;
-        public static double startingConfig = 0;
+        public static int intake = 2070;
+        public static int startingConfig = 500;
 
-        public static double frontFirst = 0;
-        public static double frontSecond = 0;
-        public static double frontThird = 0;
+        public static int frontFirst = 0;
+        public static int frontSecond = 0;
+        public static int frontThird = 0;
 
-        public static double backFirst = 0;
-        public static double backSecond = 0;
-        public static double backThird = 0;
+        public static int backFirst = 0;
+        public static int backSecond = 0;
+        public static int backThird = 0;
     }
 
-    public static long msForOneDuckSpin = 3000;
+    public static long msForOneDuckSpin = 3200;
 }

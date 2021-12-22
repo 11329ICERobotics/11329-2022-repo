@@ -13,7 +13,7 @@ public class WaitTask extends Task {
 
     @Override
     public void Begin() {
-        endTime = java.lang.System.currentTimeMillis() + millis;
+        endTime = System.currentTimeMillis() + millis;
     }
 
     @Override
@@ -23,4 +23,9 @@ public class WaitTask extends Task {
 
     @Override
     public void Stop() { }
+
+    @Override
+    public ETA GetETA() {
+        return new ETA(endTime - millis, System.currentTimeMillis(), endTime);
+    }
 }

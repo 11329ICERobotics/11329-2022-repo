@@ -29,8 +29,8 @@ public class AutoNav implements DiInterfaces.IInitializable, DiInterfaces.ITicka
     @DiContainer.Inject()
     public DuckSpinner duckSpinner;
 
-    @DiContainer.Inject(id="leftDistance")
-    public Rev2mDistanceSensor leftDistance;
+    //@DiContainer.Inject(id="leftDistance")
+    //public Rev2mDistanceSensor leftDistance;
 
     @DiContainer.Inject(id="rightDistance")
     public Rev2mDistanceSensor rightDistance;
@@ -44,11 +44,10 @@ public class AutoNav implements DiInterfaces.IInitializable, DiInterfaces.ITicka
     private List<Task> tasks = new ArrayList<>();
 
     private boolean hasInitTask = false;
+    private String currentTaskName = "Unknown";
 
     @Override
     public void Initialize() {
-        telemetry.log().add("init");
-
         //leftDistance.initialize();
         rightDistance.initialize();
         frontDistance.initialize();
@@ -57,23 +56,27 @@ public class AutoNav implements DiInterfaces.IInitializable, DiInterfaces.ITicka
 
     @Override
     public void Tick() {
-        if (tasks.size() < 1) return;
-        else if (!hasInitTask) {
+        if (tasks.size() < 1) {
+            telemetry.addData("Auto Status:", "Waiting for more tasks...");
+            return;
+        } else if (!hasInitTask) {
             tasks.get(0).Begin();
+            currentTaskName = tasks.get(0).getClass().getName();
             hasInitTask = true;
         }
+
+        telemetry.addData("Auto Status:", "Running " + currentTaskName + "\n ETA: " + tasks.get(0).GetETA().FormatETA());
 
         if (tasks.get(0).Execute()) {
             tasks.get(0).Stop();
             tasks.remove(0);
             hasInitTask = false;
+            currentTaskName = "Unknown";
         }
     }
 
     @Override
     public void Dispose() {
-        telemetry.log().add("stoppers");
-
         drivetrain.Stop();
         arm.Stop();
         duckSpinner.Stop();

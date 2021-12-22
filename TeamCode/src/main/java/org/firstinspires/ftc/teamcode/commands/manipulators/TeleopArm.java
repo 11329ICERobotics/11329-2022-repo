@@ -21,11 +21,14 @@ public class TeleopArm implements DiInterfaces.ITickable {
     @DiContainer.Inject()
     public Telemetry telemetry;
 
-    double armAngle = 0;
+    int armAngle = 0;
+
+    boolean hasReleasedOverride = true;
 
     @Override
     public void Tick() {
-        armAngle += -gamepad2.right_stick_y * RobotConfig.armSpeed;
+        //armAngle += (int) Math.round(-gamepad2.right_stick_y * RobotConfig.armSpeed);
+
 
         if (gamepad2.square) armAngle = RobotConfig.ArmPresets.startingConfig;
         if (gamepad2.dpad_right) armAngle = RobotConfig.ArmPresets.intake;
@@ -42,13 +45,27 @@ public class TeleopArm implements DiInterfaces.ITickable {
         if (armAngle < RobotConfig.minArmAngle) armAngle = RobotConfig.minArmAngle;
         if (armAngle > RobotConfig.maxArmAngle) armAngle = RobotConfig.maxArmAngle;
 
-        double intakeSpeed = (gamepad2.left_trigger * RobotConfig.outtakeSpeed - gamepad2.right_trigger * RobotConfig.intakeSpeed);
+        double intakeSpeed = ((gamepad2.left_trigger * RobotConfig.intakeSpeed + (gamepad2.left_bumper ? RobotConfig.outtakeSpeed : 0)) - gamepad2.right_trigger * RobotConfig.intakeSpeed);
+        boolean blockIntake = !gamepad2.right_bumper;
 
-        telemetry.addData("TeleopArm Status", "ArmAngle: " + armAngle + " RealArmAngle: " + arm.GetRealAngle() + " IntakeSpeed: " + intakeSpeed + " BackLimit: " + arm.BackLimitBeenHit());
+        if (gamepad1.dpad_up) arm.ZeroArm();
 
-        arm.RunArmPower(-gamepad2.right_stick_y * RobotConfig.armSpeed);
+        telemetry.addData("ArmAngle", armAngle);
+        telemetry.addData("RealArmAngle", arm.GetRealAngle());
+        telemetry.addData("TargetArmAngle", arm.targetPosition);
+        telemetry.addData("BackLimit", arm.BackLimitBeenHit());
+        telemetry.addData("ArmResetting", arm.resettingArm);
+        telemetry.addData("IntakeSpeed", intakeSpeed);
+
+        //arm.RunArmPower(-gamepad2.right_stick_y * RobotConfig.armSpeed);
         //arm.RunArm(armAngle);
-        arm.RunIntake(intakeSpeed);
-        //arm.Run(armAngle, intakeSpeed);
+        //arm.RunIntake(intakeSpeed);
+
+        arm.OverridePositionalControl(gamepad2.right_stick_y != 0);
+        if (gamepad2.right_stick_y != 0) armAngle = arm.GetRealAngle();
+        arm.OverridePower(-gamepad2.right_stick_y * RobotConfig.armSpeed);
+
+        arm.Run(armAngle, intakeSpeed);
+        arm.MoveServo(blockIntake);
     }
 }

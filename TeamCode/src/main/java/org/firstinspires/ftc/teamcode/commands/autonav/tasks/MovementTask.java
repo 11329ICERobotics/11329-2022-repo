@@ -34,7 +34,7 @@ public class MovementTask extends Task {
 
     @Override
     public void Begin() {
-        now = java.lang.System.currentTimeMillis();
+        now = System.currentTimeMillis();
 
         startTime = now;
         stopTime = startTime + millis;
@@ -46,13 +46,13 @@ public class MovementTask extends Task {
 
     @Override
     public boolean Execute() {
-        now = java.lang.System.currentTimeMillis();
+        now = System.currentTimeMillis();
 
         if (now >= stopTime) return true;
 
-        if (now < startTime + rampUpTime){
+        if (now < rampUpTime){
             autoNav.drivetrain.MecanumDrive(forwards, left, clockwise, (speed * Math.min(((float)(now-startTime)/(float)(rampUpTime-startTime)), 1)));
-        } else if (now > stopTime - rampDownTime) {
+        } else if (now > rampDownTime) {
             autoNav.drivetrain.MecanumDrive(forwards, left, clockwise, (speed * (1 - ((float)(now - rampDownTime)/(float)(stopTime - rampDownTime)))));
         } else {
             autoNav.drivetrain.MecanumDrive(forwards, left, clockwise, speed);
@@ -64,5 +64,10 @@ public class MovementTask extends Task {
     @Override
     public void Stop() {
         autoNav.drivetrain.TankDrive(0, 0);
+    }
+
+    @Override
+    public ETA GetETA() {
+        return new ETA(startTime, now, stopTime);
     }
 }

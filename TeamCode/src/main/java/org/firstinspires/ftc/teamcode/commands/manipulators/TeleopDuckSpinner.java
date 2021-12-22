@@ -26,7 +26,7 @@ public class TeleopDuckSpinner implements DiInterfaces.ITickable {
     public void Tick() {
         boolean spin = gamepad1.circle;
 
-        telemetry.addData("TeleopDuckSpinner Status", "Spinning?: " + spin);
+        telemetry.addData("Duck Spinning?", spin);
 
         duckSpinner.Spin(spin);
     }

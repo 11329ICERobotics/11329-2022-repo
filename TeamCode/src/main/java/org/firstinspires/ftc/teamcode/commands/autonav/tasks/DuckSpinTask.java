@@ -22,7 +22,7 @@ public class DuckSpinTask extends Task {
 
     @Override
     public void Begin() {
-        endTime = java.lang.System.currentTimeMillis() + millis;
+        endTime = System.currentTimeMillis() + millis;
     }
 
     @Override
@@ -45,5 +45,10 @@ public class DuckSpinTask extends Task {
         }
 
         autoNav.duckSpinner.Spin(false);
+    }
+
+    @Override
+    public ETA GetETA() {
+        return new ETA(endTime - millis, System.currentTimeMillis(), endTime);
     }
 }

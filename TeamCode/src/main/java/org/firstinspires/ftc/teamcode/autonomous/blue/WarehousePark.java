@@ -15,7 +15,7 @@ public class WarehousePark extends AutoBase {
         autoNav.AddTask(new CustomTask() {
             @Override
             public void begin() {
-                autoNav.arm.RunArmPower(0.5);
+                //autoNav.arm.RunArmPower(0.5);
             }
 
             @Override
@@ -28,7 +28,7 @@ public class WarehousePark extends AutoBase {
         autoNav.AddTask(new CustomTask() {
             @Override
             public void begin() {
-                autoNav.arm.RunArmPower(0);
+                //autoNav.arm.RunArmPower(0);
             }
 
             @Override
@@ -39,8 +39,8 @@ public class WarehousePark extends AutoBase {
         });
         autoNav.AddTask(new MovementTask(1500, -10, 0, 0.5f));
         autoNav.AddTask(new MovementTask(1500, -290, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(900, 1, 0.5f));
-        autoNav.AddTask(new MovementTask(1250, -90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(1000, -1, 0.5f));
+        autoNav.AddTask(new MovementTask(1250, 90, 0, 0.5f));
     }
 
     @Override

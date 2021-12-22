@@ -19,7 +19,7 @@ public abstract class CustomTimedTask extends Task {
     public void Begin() {
         begin();
 
-        endTime = java.lang.System.currentTimeMillis() + millis;
+        endTime = System.currentTimeMillis() + millis;
     }
 
     @Override
@@ -32,5 +32,10 @@ public abstract class CustomTimedTask extends Task {
     @Override
     public void Stop() {
         stop();
+    }
+
+    @Override
+    public ETA GetETA() {
+        return new ETA(endTime - millis, System.currentTimeMillis(), endTime);
     }
 }

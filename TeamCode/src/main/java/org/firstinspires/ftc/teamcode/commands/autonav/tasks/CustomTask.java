@@ -25,4 +25,9 @@ public abstract class CustomTask extends Task {
     public void Stop() {
         stop();
     }
+
+    @Override
+    public ETA GetETA() {
+        return new ETA();
+    }
 }

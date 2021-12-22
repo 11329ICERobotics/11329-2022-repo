@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.utilities.di.DiInterfaces;
 
 public class DuckSpinner implements DiInterfaces.IInitializable, DiInterfaces.IDisposable {
     @DiContainer.Inject(id="spinnerMotor")
-    public DcMotor spinnerMotor;
+    public DcMotorEx spinnerMotor;
 
     @DiContainer.Inject
     public RobotSide side;

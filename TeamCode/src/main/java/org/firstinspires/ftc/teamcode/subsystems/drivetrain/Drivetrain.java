@@ -10,38 +10,38 @@ import org.firstinspires.ftc.teamcode.utilities.di.DiInterfaces;
 
 public class Drivetrain implements DiInterfaces.IInitializable, DiInterfaces.IDisposable {
     @DiContainer.Inject(id="frontLeftMotor")
-    public DcMotor frontLeftMotor; // leftForwardEncoder
+    public DcMotorEx frontLeftMotor; // leftForwardEncoder
 
     @DiContainer.Inject(id="frontRightMotor")
-    public DcMotor frontRightMotor; // rightForwardEncoder
+    public DcMotorEx frontRightMotor; // rightForwardEncoder
 
     @DiContainer.Inject(id="backLeftMotor")
-    public DcMotor backLeftMotor; // BackEncoder
+    public DcMotorEx backLeftMotor; // BackEncoder
 
     @DiContainer.Inject(id="backRightMotor")
-    public DcMotor backRightMotor;
+    public DcMotorEx backRightMotor;
 
     @Override
     public void Initialize() {
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeftMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         //frontLeftMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeftMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         //frontRightMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRightMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         //backLeftMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeftMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         //backRightMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
     }
 
     @Override

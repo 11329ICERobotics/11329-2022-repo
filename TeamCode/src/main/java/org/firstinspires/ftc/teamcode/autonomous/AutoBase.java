@@ -34,16 +34,10 @@ public abstract class AutoBase extends OpModeBase {
 
     @Override
     public void start() {
-        telemetry.log().add("start start");
-
         //audioClipID = hardwareMap.appContext.getResources().getIdentifier("funny", "raw", hardwareMap.appContext.getPackageName());
         //SoundPlayer.getInstance().setMasterVolume(1);
         SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, audioClipID);
 
-        telemetry.log().add("ready start");
-
         Run();
-
-        telemetry.log().add("done start");
     }
 }

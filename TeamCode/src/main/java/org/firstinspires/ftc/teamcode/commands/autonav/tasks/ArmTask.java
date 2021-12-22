@@ -3,13 +3,13 @@ package org.firstinspires.ftc.teamcode.commands.autonav.tasks;
 import org.firstinspires.ftc.teamcode.commands.autonav.Task;
 
 public class ArmTask extends Task {
-    float positionDegrees = 0;
+    int positionDegrees = 0;
     boolean position = false;
 
-    float intakeSpeed = 0;
+    double intakeSpeed = 0;
     boolean intake = false;
 
-    public ArmTask(Float positionDegrees, Float intakeSpeed) {
+    public ArmTask(Integer positionDegrees, Double intakeSpeed) {
         if (positionDegrees != null) {
             this.positionDegrees = positionDegrees;
             position = true;
@@ -41,5 +41,10 @@ public class ArmTask extends Task {
 
     @Override
     public void Stop() { }
+
+    @Override
+    public ETA GetETA() {
+        return new ETA();
+    }
 }
 
