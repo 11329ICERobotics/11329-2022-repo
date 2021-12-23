@@ -27,13 +27,13 @@ public abstract class AutoBase extends OpModeBase {
         //SoundPlayer.getInstance().setMasterVolume(1);
         SoundPlayer.getInstance().preload(hardwareMap.appContext, audioClipID);
 
-        if (GetSide() == RobotSide.Red) Container.BindInstance(hardwareMap.get(WebcamName.class, "redCamera"));
-        else Container.BindInstance(hardwareMap.get(WebcamName.class, "blueCamera"));
-        Container.BindInstance(hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName())).WithId("cameraMonitorViewId");
+        //if (GetSide() == RobotSide.Red) Container.BindInstance(hardwareMap.get(WebcamName.class, "redCamera"));
+        //else Container.BindInstance(hardwareMap.get(WebcamName.class, "blueCamera"));
+        //Container.BindInstance(hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName())).WithId("cameraMonitorViewId");
 
-        Container.Bind(BarcodePipeline.class).AsSingle();
+        //Container.Bind(BarcodePipeline.class).AsSingle();
 
-        Container.Bind(ComputerVision.class).AsSingle();
+        //Container.Bind(ComputerVision.class).AsSingle();
 
         autoNav = (AutoNav) Container.Resolve(AutoNav.class);
 

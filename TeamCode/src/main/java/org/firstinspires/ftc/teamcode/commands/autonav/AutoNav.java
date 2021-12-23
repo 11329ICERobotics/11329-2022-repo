@@ -30,7 +30,7 @@ public class AutoNav implements DiInterfaces.IInitializable, DiInterfaces.ITicka
     @DiContainer.Inject()
     public DuckSpinner duckSpinner;
 
-    @DiContainer.Inject()
+    //@DiContainer.Inject()
     public ComputerVision computerVision;
 
     //@DiContainer.Inject(id="leftDistance")
