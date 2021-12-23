@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode.commands.autonav;
 
+import org.firstinspires.ftc.teamcode.subsystems.Vision.ComputerVision;
+
 public abstract class Task {
     public abstract void Begin();
     public abstract boolean Execute();
     public abstract void Stop();
     public abstract ETA GetETA();
     public AutoNav autoNav;
+    public ComputerVision computerVision;
 
     public class ETA {
         public double startTime;

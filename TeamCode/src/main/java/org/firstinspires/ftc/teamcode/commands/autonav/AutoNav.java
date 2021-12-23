@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.commands.autonav;
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.subsystems.Vision.ComputerVision;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.manipulators.Arm;
 import org.firstinspires.ftc.teamcode.subsystems.manipulators.DuckSpinner;
@@ -28,6 +29,9 @@ public class AutoNav implements DiInterfaces.IInitializable, DiInterfaces.ITicka
 
     @DiContainer.Inject()
     public DuckSpinner duckSpinner;
+
+    @DiContainer.Inject()
+    public ComputerVision computerVision;
 
     //@DiContainer.Inject(id="leftDistance")
     //public Rev2mDistanceSensor leftDistance;
@@ -84,6 +88,7 @@ public class AutoNav implements DiInterfaces.IInitializable, DiInterfaces.ITicka
 
     public void AddTask(Task task) {
         task.autoNav = this;
+        task.computerVision = computerVision;
         tasks.add(task);
     }
 }
