@@ -3,15 +3,15 @@ package org.firstinspires.ftc.teamcode.commands.autonav.tasks;
 import org.firstinspires.ftc.teamcode.commands.autonav.Task;
 
 public class ArmTask extends Task {
-    int positionDegrees = 0;
+    int positionTicks = 0;
     boolean position = false;
 
     double intakeSpeed = 0;
     boolean intake = false;
 
-    public ArmTask(Integer positionDegrees, Double intakeSpeed) {
-        if (positionDegrees != null) {
-            this.positionDegrees = positionDegrees;
+    public ArmTask(Integer positionTicks, Double intakeSpeed) {
+        if (positionTicks != null) {
+            this.positionTicks = positionTicks;
             position = true;
         }
 
@@ -31,7 +31,7 @@ public class ArmTask extends Task {
         }
 
         if (position) {
-            autoNav.arm.RunArm(positionDegrees);
+            autoNav.arm.RunArm(positionTicks);
 
             return autoNav.arm.IsArmDoneMoving();
         }

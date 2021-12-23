@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.autonomous.AutoBase;
+import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ArmTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.CustomTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.DuckSpinTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.MovementTask;
@@ -15,31 +16,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 public class DuckSpin extends AutoBase {
     @Override
     public void Run() {
-        autoNav.AddTask(new CustomTask() {
-            @Override
-            public void begin() {
-                //autoNav.arm.RunArmPower(0.5);
-            }
-
-            @Override
-            public boolean execute() { return true; }
-
-            @Override
-            public void stop() { }
-        });
-        autoNav.AddTask(new WaitTask(750));
-        autoNav.AddTask(new CustomTask() {
-            @Override
-            public void begin() {
-                //autoNav.arm.RunArmPower(0);
-            }
-
-            @Override
-            public boolean execute() { return true; }
-
-            @Override
-            public void stop() { }
-        });
+        autoNav.AddTask(new ArmTask(1000, null));
         autoNav.AddTask(new MovementTask(3100, -35, 0, -0.25f));
         autoNav.AddTask(new MovementTask(1200, -90, 0, 0.25f));
         autoNav.AddTask(new DuckSpinTask(true));

@@ -40,9 +40,9 @@ public class RobotConfig {
         public static int intake = 2070;
         public static int startingConfig = 500;
 
-        public static int frontFirst = 0;
-        public static int frontSecond = 0;
-        public static int frontThird = 0;
+        public static int frontFirst = 1360;
+        public static int frontSecond = 1670;
+        public static int frontThird = 1900;
 
         public static int backFirst = 0;
         public static int backSecond = 0;
