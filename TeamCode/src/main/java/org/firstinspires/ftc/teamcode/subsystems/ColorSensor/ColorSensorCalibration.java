@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems.ColorSensor;
 
+
 public class ColorSensorCalibration {
     public int absentRed = 0;
     public int absentGreen = 0;
@@ -109,7 +110,7 @@ public class ColorSensorCalibration {
         presentDuckBlue = blue;
     }
 
-    public boolean isFreightPresent(int red, int green, int blue) {
+    public freightType isFreightPresent(int red, int green, int blue) {
         double absentXDerivative = absentRed - red;
         double absentYDerivative = absentGreen - green;
         double absentZDerivative = absentBlue - blue;
@@ -120,7 +121,20 @@ public class ColorSensorCalibration {
         double presentBlockZDerivative = presentBlockBlue - blue;
         double presentBlockDistance = Math.sqrt((double)(presentBlockXDerivative * presentBlockXDerivative + presentBlockYDerivative * presentBlockYDerivative + presentBlockZDerivative * presentBlockZDerivative));
 
-        return presentBlockDistance < absentDistance;
+        double presentBallXDerivative = presentBallRed - red;
+        double presentBallYDerivative = presentBallGreen - green;
+        double presentBallZDerivative = presentBallBlue - blue;
+        double presentBallDistance = Math.sqrt((double)(presentBallXDerivative * presentBallXDerivative + presentBallYDerivative * presentBallYDerivative + presentBallZDerivative * presentBallZDerivative));
 
+        double presentDuckXDerivative = presentDuckRed - red;
+        double presentDuckYDerivative = presentBallGreen - green;
+        double presentDuckZDerivative = presentBallBlue - blue;
+        double presentDuckDistance = Math.sqrt((double)(presentDuckXDerivative * presentDuckXDerivative + presentDuckYDerivative * presentDuckYDerivative + presentDuckZDerivative * presentDuckZDerivative));
+
+        double whichFreight = Math.min(Math.min(presentBlockDistance, absentDistance), Math.min(presentBallDistance, presentDuckDistance));
+        if(whichFreight == presentBlockDistance){ return freightType.Block;}
+        else if(whichFreight == presentBallDistance){ return freightType.Ball;}
+        else if(whichFreight == presentDuckDistance){ return freightType.Duck;}
+        else { return freightType.Absent;}
     }
 }
