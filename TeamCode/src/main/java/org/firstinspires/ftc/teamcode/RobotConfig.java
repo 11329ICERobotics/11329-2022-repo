@@ -36,6 +36,8 @@ public class RobotConfig {
     public static double intakeReleaseBlockAngle = 0;
     public static double intakeReleaseLeaveAngle = 1;
 
+    public static final String colorSensor1ConfigFileName = "COLOR_SENSOR_CALIBRATION1.json";
+    public static final String freightSensorName = "freightSensor";
     public static class ArmPresets {
         public static int intake = 2300;
         public static int startingConfig = 630;

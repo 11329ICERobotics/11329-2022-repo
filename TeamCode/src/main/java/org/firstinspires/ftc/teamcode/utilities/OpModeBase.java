@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.utilities;
 
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
+import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -48,6 +49,8 @@ public abstract class OpModeBase extends DiOpMode {
         Container.Bind(Drivetrain.class).AsSingle();
         Container.Bind(Arm.class).AsSingle();
         Container.Bind(DuckSpinner.class).AsSingle();
+
+        Container.BindInstance(hardwareMap.get(RevColorSensorV3.class, RobotConfig.freightSensorName)).WithId("colorSensor");
 
         InstallLower();
     }
