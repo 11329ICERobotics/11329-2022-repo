@@ -29,7 +29,7 @@ public abstract class AutoBase extends OpModeBase {
 
         //if (GetSide() == RobotSide.Red) Container.BindInstance(hardwareMap.get(WebcamName.class, "redCamera"));
         //else Container.BindInstance(hardwareMap.get(WebcamName.class, "blueCamera"));
-        //Container.BindInstance(hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName())).WithId("cameraMonitorViewId");
+        //Container.BindInstance(hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName())).WithId("cameraMonitorViewId")
 
         //Container.Bind(BarcodePipeline.class).AsSingle();
 

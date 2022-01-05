@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+
 public class RobotConfig {
     public static String frontLeftMotorName = "frontLeft";
     public static String frontRightMotorName = "frontRight";
@@ -21,6 +23,8 @@ public class RobotConfig {
 
     public static String intakeReleaseServoName = "intakeRelease";
 
+    public static final String freightSensorName = "freightSensor";
+    public static final String ledLightsName = "LEDLights";
     public static double armSpeed = 1;//0.35;
     public static double intakeSpeed = 0.5;
     public static double outtakeSpeed = 0.35;
@@ -37,7 +41,13 @@ public class RobotConfig {
     public static double intakeReleaseLeaveAngle = 1;
 
     public static final String colorSensor1ConfigFileName = "COLOR_SENSOR_CALIBRATION1.json";
-    public static final String freightSensorName = "freightSensor";
+
+
+    public static final RevBlinkinLedDriver.BlinkinPattern blockPattern = RevBlinkinLedDriver.BlinkinPattern.ORANGE;
+    public static final RevBlinkinLedDriver.BlinkinPattern ballPattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+    public static final RevBlinkinLedDriver.BlinkinPattern duckPattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
+    public static final RevBlinkinLedDriver.BlinkinPattern absentPattern = RevBlinkinLedDriver.BlinkinPattern.WHITE;
+
     public static class ArmPresets {
         public static int intake = 2300;
         public static int startingConfig = 630;

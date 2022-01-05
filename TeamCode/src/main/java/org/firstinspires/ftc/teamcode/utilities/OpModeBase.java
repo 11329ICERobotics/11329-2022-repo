@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.utilities;
 
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -50,7 +51,9 @@ public abstract class OpModeBase extends DiOpMode {
         Container.Bind(Arm.class).AsSingle();
         Container.Bind(DuckSpinner.class).AsSingle();
 
-        Container.BindInstance(hardwareMap.get(RevColorSensorV3.class, RobotConfig.freightSensorName)).WithId("colorSensor");
+        Container.BindInstance(hardwareMap.get(RevColorSensorV3.class, RobotConfig.freightSensorName)).WithId("freightSensor");
+        Container.BindInstance(hardwareMap.get(RevBlinkinLedDriver.class, RobotConfig.ledLightsName)).WithId("LEDLights");
+
 
         InstallLower();
     }
