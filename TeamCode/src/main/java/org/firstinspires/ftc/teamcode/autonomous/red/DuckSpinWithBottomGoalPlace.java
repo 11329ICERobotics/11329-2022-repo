@@ -11,19 +11,20 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.MovementTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
-@Autonomous(name="Duck Spin With Top Goal Place Red", group="Red")
-public class DuckSpinWithTopGoalPlace extends AutoBase {
+@Autonomous(name="Duck Spin With Bottom Goal Place Red", group="Red")
+public class DuckSpinWithBottomGoalPlace extends AutoBase {
     @Override
     public void Run() {
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, -RobotConfig.intakeSpeed));
+        //autoNav.AddTask(new ArmTask(null, RobotConfig.intakeSpeed));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, -RobotConfig.intakeSpeed));
         autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
         autoNav.AddTask(new MovementTask(2750, -90, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(1300, 0, 0, 0.25f));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.outtakeSpeed));
+        autoNav.AddTask(new MovementTask(575, 0, 0, 0.25f));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
-        autoNav.AddTask(new MovementTask(1300, 180, 0, 0.25f));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, 0.0));
+        autoNav.AddTask(new MovementTask(575, 180, 0, 0.25f));
         autoNav.AddTask(new MovementTask(2850, 90, 0, 0.5f));
 
         //Spin

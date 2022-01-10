@@ -11,3 +11,4 @@ public class DiInterfaces {
         void Dispose();
     }
 }
+
