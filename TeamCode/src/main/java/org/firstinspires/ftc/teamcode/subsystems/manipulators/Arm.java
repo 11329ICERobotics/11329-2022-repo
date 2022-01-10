@@ -35,13 +35,9 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
 
     @Override
     public void Initialize() {
-        //armMotor.setTargetPosition(0);
-        //armMotor.setPower(-1);
-        //armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
         armMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         armMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         armMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        //armMotor.setVelocityPIDFCoefficients(9.5, 0, 0, 0);
 
         intakeMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -62,12 +58,9 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
 
                 if (resettingArm) {
                     armMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-                    //armMotor.setTargetPosition(0);
                     targetPosition = 0;
-                    //armMotor.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
                     armMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
                     resettingArm = false;
-                    //armMotor.setPower(-1);
                 }
             }
         } else {
@@ -76,8 +69,6 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
             armMotor.setPower(nonTargetPower);
             targetPosition = GetRealAngle();
         }
-
-        //if (!resettingArm) armMotor.setTargetPosition(targetPosition);
     }
 
     @Override
@@ -98,8 +89,6 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
 
     public void ZeroArm() {
         resettingArm = true;
-        //armMotor.setPower(-0.5);
-        //armMotor.setTargetPosition(-99999);
         targetPosition = -99999;
     }
 

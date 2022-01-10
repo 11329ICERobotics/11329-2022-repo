@@ -21,19 +21,18 @@ public abstract class AutoBase extends OpModeBase {
 
     @Override
     public void InstallLower() throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        Container.Bind(AutoNav.class).AsSingle();
-
         audioClipID = hardwareMap.appContext.getResources().getIdentifier("funny", "raw", hardwareMap.appContext.getPackageName());
         //SoundPlayer.getInstance().setMasterVolume(1);
         SoundPlayer.getInstance().preload(hardwareMap.appContext, audioClipID);
 
         if (GetSide() == RobotSide.Red) Container.BindInstance(hardwareMap.get(WebcamName.class, "redCamera"));
         else Container.BindInstance(hardwareMap.get(WebcamName.class, "blueCamera"));
-        Container.BindInstance(hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName())).WithId("cameraMonitorViewId");
+        Container.BindInstance((Integer) hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName())).WithId("cameraMonitorViewId");
 
         Container.Bind(BarcodePipeline.class).AsSingle();
-
         Container.Bind(ComputerVision.class).AsSingle();
+
+        Container.Bind(AutoNav.class).AsSingle();
 
         autoNav = (AutoNav) Container.Resolve(AutoNav.class);
 

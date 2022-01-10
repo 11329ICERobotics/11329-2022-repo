@@ -16,7 +16,7 @@ public class ComputerVision implements DiInterfaces.IInitializable, DiInterfaces
     public BarcodePipeline barcodePipeline;
 
     @DiContainer.Inject(id="cameraMonitorViewId")
-    public int cameraMonitorViewId;
+    public Integer cameraMonitorViewId;
 
     OpenCvWebcam webcam;
 
