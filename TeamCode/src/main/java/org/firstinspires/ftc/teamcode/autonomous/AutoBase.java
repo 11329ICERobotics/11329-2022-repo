@@ -21,9 +21,9 @@ public abstract class AutoBase extends OpModeBase {
 
     @Override
     public void InstallLower() throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        audioClipID = hardwareMap.appContext.getResources().getIdentifier("funny", "raw", hardwareMap.appContext.getPackageName());
+        //audioClipID = hardwareMap.appContext.getResources().getIdentifier("funny", "raw", hardwareMap.appContext.getPackageName());
         //SoundPlayer.getInstance().setMasterVolume(1);
-        SoundPlayer.getInstance().preload(hardwareMap.appContext, audioClipID);
+        //SoundPlayer.getInstance().preload(hardwareMap.appContext, audioClipID);
 
         if (GetSide() == RobotSide.Red) Container.BindInstance(hardwareMap.get(WebcamName.class, "redCamera"));
         else Container.BindInstance(hardwareMap.get(WebcamName.class, "blueCamera"));
@@ -32,8 +32,10 @@ public abstract class AutoBase extends OpModeBase {
         Container.Bind(BarcodePipeline.class).AsSingle();
         Container.Bind(ComputerVision.class).AsSingle();
 
-        Container.Bind(AutoNav.class).AsSingle();
+        //autoNav = new AutoNav();
+        //Container.BindInstance(autoNav);
 
+        Container.Bind(AutoNav.class).AsSingle();
         autoNav = (AutoNav) Container.Resolve(AutoNav.class);
 
         //autoNav = (AutoNav) Container.Instantiate(AutoNav.class);
@@ -45,7 +47,7 @@ public abstract class AutoBase extends OpModeBase {
     public void start() {
         //audioClipID = hardwareMap.appContext.getResources().getIdentifier("funny", "raw", hardwareMap.appContext.getPackageName());
         //SoundPlayer.getInstance().setMasterVolume(1);
-        SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, audioClipID);
+        //SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, audioClipID);
 
         Run();
     }

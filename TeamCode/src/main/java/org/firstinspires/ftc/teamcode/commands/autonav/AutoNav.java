@@ -36,14 +36,14 @@ public class AutoNav implements DiInterfaces.IInitializable, DiInterfaces.ITicka
     //@DiContainer.Inject(id="leftDistance")
     //public Rev2mDistanceSensor leftDistance;
 
-    @DiContainer.Inject(id="rightDistance")
-    public Rev2mDistanceSensor rightDistance;
+    //@DiContainer.Inject(id="rightDistance")
+    //public Rev2mDistanceSensor rightDistance;
 
-    @DiContainer.Inject(id="frontDistance")
-    public Rev2mDistanceSensor frontDistance;
+    //@DiContainer.Inject(id="frontDistance")
+    //public Rev2mDistanceSensor frontDistance;
 
-    @DiContainer.Inject(id="backDistance")
-    public Rev2mDistanceSensor backDistance;
+    //@DiContainer.Inject(id="backDistance")
+    //public Rev2mDistanceSensor backDistance;
 
     private List<Task> tasks = new ArrayList<>();
 
@@ -53,9 +53,10 @@ public class AutoNav implements DiInterfaces.IInitializable, DiInterfaces.ITicka
     @Override
     public void Initialize() {
         //leftDistance.initialize();
-        rightDistance.initialize();
-        frontDistance.initialize();
-        backDistance.initialize();
+        //rightDistance.initialize();
+        //frontDistance.initialize();
+        //backDistance.initialize();
+
     }
 
     @Override

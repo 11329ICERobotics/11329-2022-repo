@@ -37,23 +37,22 @@ public abstract class OpModeBase extends DiOpMode {
         Container.BindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.spinnerMotorName)).WithId("spinnerMotor");
 
         //Container.BindInstance(hardwareMap.get(Rev2mDistanceSensor.class, RobotConfig.leftDistanceName)).WithId("leftDistance");
-        Container.BindInstance(hardwareMap.get(Rev2mDistanceSensor.class, RobotConfig.rightDistanceName)).WithId("rightDistance");
-        Container.BindInstance(hardwareMap.get(Rev2mDistanceSensor.class, RobotConfig.frontDistanceName)).WithId("frontDistance");
-        Container.BindInstance(hardwareMap.get(Rev2mDistanceSensor.class, RobotConfig.backDistanceName)).WithId("backDistance");
+//        Container.BindInstance(hardwareMap.get(Rev2mDistanceSensor.class, RobotConfig.rightDistanceName)).WithId("rightDistance");
+//        Container.BindInstance(hardwareMap.get(Rev2mDistanceSensor.class, RobotConfig.frontDistanceName)).WithId("frontDistance");
+//        Container.BindInstance(hardwareMap.get(Rev2mDistanceSensor.class, RobotConfig.backDistanceName)).WithId("backDistance");
 
         Container.BindInstance(hardwareMap.get(TouchSensor.class, RobotConfig.armButtonName)).WithId("armButton");
 
         Container.BindInstance(hardwareMap.get(Servo.class, RobotConfig.intakeReleaseServoName)).WithId("intakeRelease");
+
+        Container.BindInstance(hardwareMap.get(RevColorSensorV3.class, RobotConfig.freightSensorName)).WithId("freightSensor");
+        //Container.BindInstance(hardwareMap.get(RevBlinkinLedDriver.class, RobotConfig.ledLightsName)).WithId("LEDLights");
 
         Container.BindInstance(telemetry);
 
         Container.Bind(Drivetrain.class).AsSingle();
         Container.Bind(Arm.class).AsSingle();
         Container.Bind(DuckSpinner.class).AsSingle();
-
-        Container.BindInstance(hardwareMap.get(RevColorSensorV3.class, RobotConfig.freightSensorName)).WithId("freightSensor");
-        Container.BindInstance(hardwareMap.get(RevBlinkinLedDriver.class, RobotConfig.ledLightsName)).WithId("LEDLights");
-
 
         InstallLower();
     }

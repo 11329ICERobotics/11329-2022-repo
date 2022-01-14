@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.ServoController;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.robot.Robot;
 
@@ -42,6 +43,8 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
         intakeMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         intakeMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
+        intakeRelease.getController().pwmEnable();
     }
 
     @Override
@@ -95,6 +98,9 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public void MoveServo(boolean block) {
         if (block) intakeRelease.setPosition(RobotConfig.intakeReleaseBlockAngle);
         else intakeRelease.setPosition(RobotConfig.intakeReleaseLeaveAngle);
+        //telemetry.log().add();
+        telemetry.addData("ServoAngle", intakeRelease.getPosition());
+
     }
 
     public boolean IsArmDoneMoving() {
