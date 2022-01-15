@@ -4,7 +4,7 @@ import com.qualcomm.ftccommon.SoundPlayer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-@Autonomous(name="poggers")
+//@Autonomous(name="poggers")
 public class Test extends OpMode {
 
     @Override

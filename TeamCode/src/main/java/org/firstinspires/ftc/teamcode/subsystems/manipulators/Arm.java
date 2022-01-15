@@ -34,6 +34,8 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public boolean runToTarget = true;
     public double nonTargetPower = 0;
 
+    public double servoPosition = RobotConfig.intakeReleaseBlockAngle;
+
     @Override
     public void Initialize() {
         armMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
@@ -72,6 +74,8 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
             armMotor.setPower(nonTargetPower);
             targetPosition = GetRealAngle();
         }
+
+        intakeRelease.setPosition(servoPosition);
     }
 
     @Override
@@ -96,11 +100,8 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     }
 
     public void MoveServo(boolean block) {
-        if (block) intakeRelease.setPosition(RobotConfig.intakeReleaseBlockAngle);
-        else intakeRelease.setPosition(RobotConfig.intakeReleaseLeaveAngle);
-        //telemetry.log().add();
-        telemetry.addData("ServoAngle", intakeRelease.getPosition());
-
+        if (block) servoPosition = RobotConfig.intakeReleaseBlockAngle;
+        else servoPosition = RobotConfig.intakeReleaseLeaveAngle;
     }
 
     public boolean IsArmDoneMoving() {

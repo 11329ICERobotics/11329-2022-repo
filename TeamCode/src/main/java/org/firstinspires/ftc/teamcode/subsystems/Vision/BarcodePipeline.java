@@ -43,6 +43,11 @@ public class BarcodePipeline extends OpenCvPipeline {
 
     Mat outthing = new Mat();
 
+    int leftNumber = 0;
+    int middleNumber = 0;
+    int rightNumber = 0;
+    int swapNumber = 0;
+
     int output = 0;
 
     @Override
@@ -75,9 +80,15 @@ public class BarcodePipeline extends OpenCvPipeline {
         middleThird = thresholded.colRange(thresholded.cols() / 3, 2 * (thresholded.cols() / 3));
         rightThird = thresholded.colRange(2 * (thresholded.cols() / 3), thresholded.cols());
 
-        int leftNumber = Core.countNonZero(leftThird);
-        int middleNumber = Core.countNonZero(middleThird);
-        int rightNumber = Core.countNonZero(rightThird);
+        leftNumber = Core.countNonZero(leftThird);
+        middleNumber = Core.countNonZero(middleThird);
+        rightNumber = Core.countNonZero(rightThird);
+
+        if (side == RobotSide.Red) {
+            swapNumber = rightNumber;
+            rightNumber = leftNumber;
+            leftNumber = swapNumber;
+        }
 
         if (leftNumber < middleNumber && leftNumber < rightNumber) position = Position.One;
         if (middleNumber < leftNumber && middleNumber < rightNumber) position = Position.Two;

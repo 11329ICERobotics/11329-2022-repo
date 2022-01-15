@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.MovementTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
-@Autonomous(name="Duck Spin Blue", group="Blue")
+//@Autonomous(name="Duck Spin Blue", group="Blue")
 public class DuckSpin extends AutoBase {
     @Override
     public void Run() {

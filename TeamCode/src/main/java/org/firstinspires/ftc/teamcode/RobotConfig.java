@@ -35,13 +35,12 @@ public class RobotConfig {
     public static double slowDriveSpeed = 0.5;
 
     public static int minArmAngle = 0;
-    public static int maxArmAngle = 2300;
+    public static int maxArmAngle = 2200;
 
     public static double intakeReleaseBlockAngle = 0.45;
     public static double intakeReleaseLeaveAngle = 0;
 
     public static final String colorSensor1ConfigFileName = "COLOR_SENSOR_CALIBRATION1.json";
-
 
     public static final RevBlinkinLedDriver.BlinkinPattern blockPattern = RevBlinkinLedDriver.BlinkinPattern.ORANGE;
     public static final RevBlinkinLedDriver.BlinkinPattern ballPattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
@@ -49,8 +48,8 @@ public class RobotConfig {
     public static final RevBlinkinLedDriver.BlinkinPattern absentPattern = RevBlinkinLedDriver.BlinkinPattern.WHITE;
 
     public static class ArmPresets {
-        public static int intake = 2300;
-        public static int startingConfig = 630;
+        public static int intake = 2200;
+        public static int startingConfig = 550;
 
         public static int frontFirst = 1360;
         public static int frontSecond = 1600;
