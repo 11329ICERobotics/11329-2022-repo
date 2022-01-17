@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 @Autonomous(name="Warehouse Park Red", group="Red")
-public class WarehousePark extends AutoBase {
+public class WarehouseParkRed extends AutoBase {
     @Override
     public void Run() {
         autoNav.AddTask(new ArmTask(1000, null));
