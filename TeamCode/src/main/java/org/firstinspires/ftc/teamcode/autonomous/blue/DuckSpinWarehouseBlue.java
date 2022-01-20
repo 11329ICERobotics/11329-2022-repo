@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.MovementTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReadBarcodeTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
-//NOT DONE ITS WRONG
+
 @Autonomous(name="Duck Spin Park Warehouse Blue", group="Blue")
 public class DuckSpinWarehouseBlue extends AutoBase {
     @Override
@@ -48,16 +48,18 @@ public class DuckSpinWarehouseBlue extends AutoBase {
     }
 
     public void SpinDuck() {
-        autoNav.AddTask(new MovementTask(1250,-1, 0.5f));
         autoNav.AddTask(new ArmTask(1000, null));
-        autoNav.AddTask(new MovementTask(2750, -90, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(4000, 180, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(750, 90, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(2000, 180, 0, 0.25f));
+
         autoNav.AddTask(new DuckSpinTask(true));
         autoNav.AddTask(new MovementTask(RobotConfig.msForOneDuckSpin, 180, 0, 0.01f));
         autoNav.AddTask(new DuckSpinTask(false));
-        autoNav.AddTask(new MovementTask(2500, 90, 0, 1f));
-        autoNav.AddTask(new MovementTask(1250,1, 0.5f));
-        autoNav.AddTask(new MovementTask(1500, 0, 0, 1f));
+
+        autoNav.AddTask(new MovementTask(2000, 0, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(1000, 270, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(6000, 0, 0, 0.5f));
+
     }
 
     public void FirstPosition() {
@@ -70,7 +72,7 @@ public class DuckSpinWarehouseBlue extends AutoBase {
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, 0.0));
         autoNav.AddTask(new MovementTask(575, -180, 0, 0.25f));
-        //autoNav.AddTask(new MovementTask(2850, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
 
     public void SecondPosition() {
@@ -83,7 +85,7 @@ public class DuckSpinWarehouseBlue extends AutoBase {
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, 0.0));
         autoNav.AddTask(new MovementTask(800, -180, 0, 0.25f));
-        //autoNav.AddTask(new MovementTask(2850, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
 
     public void ThirdPosition() {
@@ -96,7 +98,7 @@ public class DuckSpinWarehouseBlue extends AutoBase {
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
         autoNav.AddTask(new MovementTask(1300, -180, 0, 0.25f));
-        //autoNav.AddTask(new MovementTask(2850, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
 
     @Override

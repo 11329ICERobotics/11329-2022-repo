@@ -38,7 +38,7 @@ public class RobotConfig {
     public static int maxArmAngle = 2200;
 
     public static double intakeReleaseBlockAngle = 0.45;
-    public static double intakeReleaseLeaveAngle = 0;
+    public static double intakeReleaseLeaveAngle = 0.25;
 
     public static final String colorSensor1ConfigFileName = "COLOR_SENSOR_CALIBRATION1.json";
 

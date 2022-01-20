@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.MovementTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReadBarcodeTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
-//DONE
-@Autonomous(name="Place, Pickup Another, and Warehouse Park Blue", group="Red")
+//LAST ON XPosition was commented (Done, not tuned)
+@Autonomous(name="Place, Pickup Another, and Warehouse Park Blue", group="Blue")
 public class PlacePickupPlaceWarehouseParkBlue extends AutoBase {
     @Override
     public void Run() {
@@ -96,39 +96,39 @@ public class PlacePickupPlaceWarehouseParkBlue extends AutoBase {
     public void FirstPosition() {
         telemetry.log().add("started FIRST");
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, RobotConfig.intakeSpeed));
-        autoNav.AddTask(new WaitTask(500));
+        //autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(625, 0, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(312, 0, 0, 0.5f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, 0.0));
-        autoNav.AddTask(new MovementTask(625, -180, 0, 0.25f)); //0050
-        //autoNav.AddTask(new MovementTask(2850, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(312, -180, 0, 0.5f)); //0050
+        //autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
 
     public void SecondPosition() {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, RobotConfig.intakeSpeed));
-        autoNav.AddTask(new WaitTask(500));
+        //autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(850, 0, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(425, 0, 0, 0.5f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, 0.0));
-        autoNav.AddTask(new MovementTask(850, -180, 0, 0.25f));
-        //autoNav.AddTask(new MovementTask(2850, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(425, -180, 0, 0.55f));
+        //autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
 
     public void ThirdPosition() {
         telemetry.log().add("started THIRD");
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.intakeSpeed));
-        autoNav.AddTask(new WaitTask(500));
+        //autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(1350, 0, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(675, 0, 0, 0.5f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
-        autoNav.AddTask(new MovementTask(1350, -180, 0, 0.25f));
-        //autoNav.AddTask(new MovementTask(2850, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(675, -180, 0, 0.5f));
+        //autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
     public void dropNewFreightAndPark() {
         telemetry.log().add("started FINAL");
