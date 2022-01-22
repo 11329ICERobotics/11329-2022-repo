@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.CustomTimedTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.DuckSpinTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.MovementTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReadBarcodeTask;
+import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReleaseIntakeTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
@@ -18,6 +19,7 @@ public class DuckSpinStorageRed extends AutoBase {
     @Override
     public void Run() {
         autoNav.AddTask(new ReadBarcodeTask());
+        autoNav.AddTask(new ReleaseIntakeTask(RobotConfig.msForReleaseIntake));
         autoNav.AddTask(new CustomTask() {
             @Override
             public void begin() {

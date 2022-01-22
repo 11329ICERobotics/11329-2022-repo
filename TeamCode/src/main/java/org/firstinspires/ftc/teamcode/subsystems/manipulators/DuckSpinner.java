@@ -35,6 +35,14 @@ public class DuckSpinner implements DiInterfaces.IInitializable, DiInterfaces.ID
         }
     }
 
+    public void Release(boolean run) {
+        if (run) {
+            spinnerMotor.setPower(-RobotConfig.spinnerSpeed);
+        } else {
+            spinnerMotor.setPower(0);
+        }
+    }
+
     public void Stop() {
         Spin(false);
     }

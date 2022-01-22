@@ -1,19 +1,18 @@
 package org.firstinspires.ftc.teamcode.commands.autonav.tasks;
 
 import org.firstinspires.ftc.teamcode.commands.autonav.Task;
-import org.firstinspires.ftc.teamcode.subsystems.manipulators.DuckSpinner;
 
-public class DuckSpinTask extends Task {
+public class ReleaseIntakeTask extends Task {
     long millis;
     boolean keepMode = false;
     boolean keepState = false;
 
     long endTime;
 
-    public DuckSpinTask(long millis) {
+    public ReleaseIntakeTask(long millis) {
         this.millis = millis;
     }
-    public DuckSpinTask(boolean keepState) {
+    public ReleaseIntakeTask(boolean keepState) {
         this.millis = 0;
 
         keepMode = true;
@@ -28,11 +27,11 @@ public class DuckSpinTask extends Task {
     @Override
     public boolean Execute() {
         if (keepMode) {
-            autoNav.duckSpinner.Spin(keepState);
+            autoNav.duckSpinner.Release(keepState);
             return true;
         }
 
-        autoNav.duckSpinner.Spin(true);
+        autoNav.duckSpinner.Release(true);
 
         return (endTime < System.currentTimeMillis());
     }
@@ -40,11 +39,11 @@ public class DuckSpinTask extends Task {
     @Override
     public void Stop() {
         if (keepMode) {
-            autoNav.duckSpinner.Spin(keepState);
+            autoNav.duckSpinner.Release(keepState);
             return;
         }
 
-        autoNav.duckSpinner.Spin(false);
+        autoNav.duckSpinner.Release(false);
     }
 
     @Override

@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.CustomTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.DuckSpinTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.MovementTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReadBarcodeTask;
+import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReleaseIntakeTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
@@ -17,6 +18,7 @@ public class DuckSpinWarehouseBlue extends AutoBase {
     @Override
     public void Run() {
         autoNav.AddTask(new ReadBarcodeTask());
+        autoNav.AddTask(new ReleaseIntakeTask(RobotConfig.msForReleaseIntake));
         autoNav.AddTask(new CustomTask() {
             @Override
             public void begin() {
@@ -58,7 +60,7 @@ public class DuckSpinWarehouseBlue extends AutoBase {
 
         autoNav.AddTask(new MovementTask(2000, 0, 0, 0.5f));
         autoNav.AddTask(new MovementTask(1000, 270, 0, 0.25f));
-        autoNav.AddTask(new MovementTask(6000, 0, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(4250, 0, 0, 0.5f));
 
     }
 

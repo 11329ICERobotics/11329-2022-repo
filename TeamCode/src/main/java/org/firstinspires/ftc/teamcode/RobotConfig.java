@@ -61,4 +61,6 @@ public class RobotConfig {
     }
 
     public static long msForOneDuckSpin = 3200;
+
+    public static long msForReleaseIntake = 250;
 }
