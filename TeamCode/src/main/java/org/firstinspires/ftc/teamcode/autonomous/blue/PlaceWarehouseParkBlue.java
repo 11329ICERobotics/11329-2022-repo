@@ -13,6 +13,8 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReleaseIntakeTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
+import java.util.Timer;
+
 @Autonomous(name="Place and Warehouse Park Blue", group="Blue")
 public class PlaceWarehouseParkBlue extends AutoBase {
     @Override
@@ -33,6 +35,7 @@ public class PlaceWarehouseParkBlue extends AutoBase {
                         SecondPosition();
                         break;
                     case Three:
+                    case Reading:
                         ThirdPosition();
                         break;
                 }
@@ -60,7 +63,7 @@ public class PlaceWarehouseParkBlue extends AutoBase {
 
         // Park
 
-        autoNav.AddTask(new MovementTask(2000, -10, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(2250, -10, 0, 0.5f));
         autoNav.AddTask(new MovementTask(1850, 90, 0, 0.5f));
         autoNav.AddTask(new MovementTask(1000, 0, 0, 0.5f));
         autoNav.AddTask(new MovementTask(1250,-1, 0.5f));

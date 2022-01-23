@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 
 public class RobotConfig {
+    public static int  possibleExtraBlocks = 3;
     public static String frontLeftMotorName = "frontLeft";
     public static String frontRightMotorName = "frontRight";
     public static String backLeftMotorName = "backLeft";
@@ -38,7 +39,7 @@ public class RobotConfig {
     public static int maxArmAngle = 2200;
 
     public static double intakeReleaseBlockAngle = 0.45;
-    public static double intakeReleaseLeaveAngle = 0.25;
+    public static double intakeReleaseLeaveAngle = 0.20;
 
     public static final String colorSensor1ConfigFileName = "COLOR_SENSOR_CALIBRATION1.json";
 

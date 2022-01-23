@@ -126,11 +126,11 @@ public class PlacePickupPlaceWarehouseParkBlue extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.intakeSpeed));
         //autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(675, 0, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(800, 0, 0, 0.5f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
-        autoNav.AddTask(new MovementTask(675, -180, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(800, -180, 0, 0.5f));
         //autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
     public void dropNewFreightAndPark() {
