@@ -60,7 +60,9 @@ public class TheoreticalSuperAutoBlue extends AutoBase {
     }
     public void Pickup(){
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.intake, RobotConfig.intakeSpeed));
-
+        autoNav.AddTask(new MovementTask(1500, -10, 0, 1f));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.intakeSpeed));
+        autoNav.AddTask(new MovementTask(1500, 0, 0, -1f));
     }
 
     public void Park() {
@@ -68,18 +70,23 @@ public class TheoreticalSuperAutoBlue extends AutoBase {
     }
 
     public void FirstPosition() {
+        autoNav.AddTask(new MovementTask(500, 90, 1f, 0.5f));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, RobotConfig.outtakeSpeed));
+        autoNav.AddTask(new MovementTask(500,-90, 1f, 0.5f));
 
     }
 
     public void SecondPosition() {
+        autoNav.AddTask(new MovementTask(500, 90, 1f, 0.5f));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, RobotConfig.outtakeSpeed));
+        autoNav.AddTask(new MovementTask(500,-90, 1f, 0.5f));
 
     }
 
     public void ThirdPosition() {
         autoNav.AddTask(new MovementTask(500, 90, 1f, 0.5f));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, RobotConfig.outtakeSpeed));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.outtakeSpeed));
         autoNav.AddTask(new MovementTask(500,-90, 1f, 0.5f));
-
     }
 
     @Override
