@@ -45,7 +45,7 @@ public class TeleopArm implements DiInterfaces.ITickable {
         if (armAngle < RobotConfig.minArmAngle) armAngle = RobotConfig.minArmAngle;
         if (armAngle > RobotConfig.maxArmAngle) armAngle = RobotConfig.maxArmAngle;
 
-        double intakeSpeed = ((gamepad2.left_trigger * RobotConfig.intakeSpeed + (gamepad2.left_bumper ? RobotConfig.outtakeSpeed : 0)) - gamepad2.right_trigger * RobotConfig.intakeSpeed);
+        double intakeSpeed = ((gamepad2.left_trigger * RobotConfig.intakeSpeed + (gamepad2.left_bumper ? RobotConfig.outtakeSpeed : 0)) - gamepad2.right_trigger * RobotConfig.outtakeSpeed);
         boolean blockIntake = !gamepad2.right_bumper;
 
         if (gamepad1.dpad_up) arm.ZeroArm();

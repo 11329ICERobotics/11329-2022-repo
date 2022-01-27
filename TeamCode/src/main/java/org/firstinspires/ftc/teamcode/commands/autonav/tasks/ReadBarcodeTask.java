@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.commands.autonav.tasks;
 import org.firstinspires.ftc.teamcode.commands.autonav.Task;
 
 public class ReadBarcodeTask extends Task {
-    long millis = 3000;
+    long millis = 500;
 
     long endTime = 0;
 

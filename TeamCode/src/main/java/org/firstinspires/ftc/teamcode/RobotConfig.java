@@ -32,8 +32,8 @@ public class RobotConfig {
 
     public static double spinnerSpeed = 0.85;
 
-    public static double fastDriveSpeed = 0.75;
-    public static double slowDriveSpeed = 0.5;
+    public static double fastDriveSpeed = 0.6;//.75
+    public static double slowDriveSpeed = 0.35;//.75
 
     public static int minArmAngle = 0;
     public static int maxArmAngle = 2200;
