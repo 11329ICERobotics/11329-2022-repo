@@ -36,6 +36,11 @@ public class TheoreticalSuperAutoBlue extends AutoBase {
                         break;
                     case Three:
                         ThirdPosition();
+                        Pickup();
+                        ThirdPosition();
+                        Pickup();
+                        ThirdPosition();
+                        Pickup();
                         break;
                     case Reading:
                         ThirdPosition();
@@ -52,17 +57,18 @@ public class TheoreticalSuperAutoBlue extends AutoBase {
             public void stop() { }
         });
 
-        Pickup();
-        ThirdPosition();
-        Pickup();
-        ThirdPosition();
+        //Pickup();
+        //ThirdPosition();
+        //Pickup();
+        //ThirdPosition();
 
     }
     public void Pickup(){
+        autoNav.AddTask(new MovementTask(400, -90, 0, 1f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.intake, RobotConfig.intakeSpeed));
         autoNav.AddTask(new MovementTask(1500, -10, 0, 1f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.intakeSpeed));
-        autoNav.AddTask(new MovementTask(1500, 0, 0, -1f));
+        autoNav.AddTask(new MovementTask(1200, 0, 0, -1f));
     }
 
     public void Park() {
@@ -84,9 +90,21 @@ public class TheoreticalSuperAutoBlue extends AutoBase {
     }
 
     public void ThirdPosition() {
-        autoNav.AddTask(new MovementTask(500, 90, 1f, 0.5f));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.outtakeSpeed));
-        autoNav.AddTask(new MovementTask(500,-90, 1f, 0.5f));
+        autoNav.AddTask(new MovementTask(1000, 90, 1f, 1f));
+        autoNav.AddTask(new MovementTask(300, 90, 0, 1f));
+        autoNav.AddTask(new MovementTask(500, 0, 0, 1f));
+
+        autoNav.AddTask(new WaitTask(500));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, -RobotConfig.outtakeSpeed));
+        autoNav.AddTask(new WaitTask(1000));
+
+        autoNav.AddTask(new MovementTask(500, 0, 0, -1f));
+        autoNav.AddTask(new MovementTask(300, 90, 0, -1f));
+        autoNav.AddTask(new MovementTask(1000, 90, 1f, -1f));
+
+        //autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.outtakeSpeed));
+        //autoNav.AddTask(new MovementTask(500,-90, 1f, 0.5f));
     }
 
     @Override
