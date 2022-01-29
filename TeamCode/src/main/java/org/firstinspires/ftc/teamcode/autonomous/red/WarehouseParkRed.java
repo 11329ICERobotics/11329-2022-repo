@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 public class WarehouseParkRed extends AutoBase {
     @Override
     public void Run() {
+        autoNav.AddTask(new MovementTask(500, 0, 0, 0.02f));
         autoNav.AddTask(new ReleaseIntakeTask(RobotConfig.msForReleaseIntake));
         autoNav.AddTask(new ArmTask(1000, null));
         autoNav.AddTask(new MovementTask(1900, 10, 0, 0.5f));

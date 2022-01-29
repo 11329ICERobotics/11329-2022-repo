@@ -21,6 +21,7 @@ public class PlaceWarehouseParkBlue extends AutoBase {
     public void Run() {
         autoNav.AddTask(new ReadBarcodeTask());
         autoNav.AddTask(new ReleaseIntakeTask(RobotConfig.msForReleaseIntake));
+        autoNav.AddTask(new MovementTask(500, 0, 0, 0.02f));
         autoNav.AddTask(new CustomTask() {
             @Override
             public void begin() {

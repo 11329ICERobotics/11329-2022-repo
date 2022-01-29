@@ -21,9 +21,11 @@ public class TeleopDrive implements DiInterfaces.ITickable {
     @DiContainer.Inject()
     public Telemetry telemetry;
 
+    public double speed = RobotConfig.slowDriveSpeed;
     public boolean isFast = false;
     public boolean isHoldingFast = false;
 
+    public boolean isHoldingTurbo = false;
     @Override
     public void Tick() {
         double vertical = -powerCurve(gamepad1.left_stick_y);
@@ -43,7 +45,13 @@ public class TeleopDrive implements DiInterfaces.ITickable {
             isHoldingFast = false;
         }
 
-        drivetrain.MecanumDrive(vertical, horizontal, rotational, (isFast ? RobotConfig.fastDriveSpeed : RobotConfig.slowDriveSpeed));
+        speed =  (isFast ? RobotConfig.fastDriveSpeed : RobotConfig.slowDriveSpeed);
+
+        if(gamepad1.left_bumper){
+            speed = RobotConfig.turboDriveSpeed;
+        }
+
+        drivetrain.MecanumDrive(vertical, horizontal, rotational,speed);
         //drivetrain.TankDrive(horizontal, rotational);
     }
 

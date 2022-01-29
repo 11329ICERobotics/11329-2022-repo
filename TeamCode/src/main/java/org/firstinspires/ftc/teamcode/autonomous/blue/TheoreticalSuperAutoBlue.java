@@ -15,12 +15,13 @@ import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
 import java.util.Timer;
 
-@Autonomous(name="Super Auto Blue", group="Blue")
+@Autonomous(name="DO NOT RUN", group="Blue")
 public class TheoreticalSuperAutoBlue extends AutoBase {
     @Override
     public void Run() {
         autoNav.AddTask(new ReadBarcodeTask());
         autoNav.AddTask(new ReleaseIntakeTask(RobotConfig.msForReleaseIntake));
+        autoNav.AddTask(new MovementTask(500, 0, 0, 0.02f));
         autoNav.AddTask(new CustomTask() {
             @Override
             public void begin() {
@@ -95,8 +96,9 @@ public class TheoreticalSuperAutoBlue extends AutoBase {
         autoNav.AddTask(new MovementTask(500, 0, 0, 1f));
 
         autoNav.AddTask(new WaitTask(500));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, -RobotConfig.outtakeSpeed));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, 0.0));
+        autoNav.AddTask(new WaitTask(500));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(1000));
 
         autoNav.AddTask(new MovementTask(500, 0, 0, -1f));
