@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReleaseIntakeTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
-@Autonomous(name="SlowSuperArmUp", group="Red")
+@Autonomous(name="SlowSuperArmUpRed", group="Red")
 public class TheoreticalSuperAutoRedSlowArmUpAtLast extends AutoBase {
     public float speed = 0.5f;
     @Override

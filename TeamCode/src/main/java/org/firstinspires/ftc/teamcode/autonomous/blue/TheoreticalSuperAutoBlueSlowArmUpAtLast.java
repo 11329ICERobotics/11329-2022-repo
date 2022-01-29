@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonomous.red;
+package org.firstinspires.ftc.teamcode.autonomous.blue;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -12,8 +12,8 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReleaseIntakeTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
-@Autonomous(name="SlowSuperPickupRed", group="Red")
-public class TheoreticalSuperAutoRedSlow extends AutoBase {
+@Autonomous(name="SlowSuperArmUpBlue", group="Blue")
+public class TheoreticalSuperAutoBlueSlowArmUpAtLast extends AutoBase {
     public float speed = 0.5f;
     @Override
     public void Run() {
@@ -74,17 +74,18 @@ public class TheoreticalSuperAutoRedSlow extends AutoBase {
 
     }
     public void PickupSecond(){
-        autoNav.AddTask(new MovementTask((long) (200/speed), 90, 0, speed));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.intake, RobotConfig.intakeSpeed));
-        autoNav.AddTask(new MovementTask((long) (1500/speed), 10, 0, speed));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.intakeSpeed));
+        autoNav.AddTask(new ArmTask(1000, RobotConfig.intakeSpeed));
+        autoNav.AddTask(new MovementTask((long) (200/speed), -90, 0, speed));
+        //autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.intake, RobotConfig.intakeSpeed));
+        autoNav.AddTask(new MovementTask((long) (1500/speed), -10, 0, speed));
+
   }
     public void Pickup(){
-        autoNav.AddTask(new MovementTask((long) (200/speed), 90, 0, speed));
+        autoNav.AddTask(new MovementTask((long) (200/speed), -90, 0, speed));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.intake, RobotConfig.intakeSpeed));
-        autoNav.AddTask(new MovementTask((long) (1300/speed), 10, 0, speed));
+        autoNav.AddTask(new MovementTask((long) (1300/speed), -10, 0, speed));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.intakeSpeed));
-        autoNav.AddTask(new MovementTask((long) (200/speed), -90, 0, -speed));
+        autoNav.AddTask(new MovementTask((long) (200/speed), 90, 0, -speed));
 
         autoNav.AddTask(new MovementTask((long) (1300/speed), 0, 0, -speed));
     }
@@ -97,10 +98,10 @@ public class TheoreticalSuperAutoRedSlow extends AutoBase {
         autoNav.AddTask(new ArmTask(null, RobotConfig.intakeSpeed));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, null));
 
+        autoNav.AddTask(new MovementTask((long) (900), 90, 1f, 1f));
 
-        autoNav.AddTask(new MovementTask((long) (900), -90, -1f, 1f));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask((long) (500/speed), -90, 0, speed));
+        autoNav.AddTask(new MovementTask((long) (500/speed), 90, 0, speed));
         autoNav.AddTask(new MovementTask((long) (150/speed), 0, 0, speed));
 
         autoNav.AddTask(new WaitTask(500));
@@ -112,8 +113,8 @@ public class TheoreticalSuperAutoRedSlow extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
 
         autoNav.AddTask(new MovementTask((long) (150/speed), 0, 0, -speed));
-        autoNav.AddTask(new MovementTask((long) (500/speed), -90, 0, -speed));
-        autoNav.AddTask(new MovementTask((long) (900), -90, -1f, -1f));
+        autoNav.AddTask(new MovementTask((long) (500/speed), 90, 0, -speed));
+        autoNav.AddTask(new MovementTask((long) (900), 90, 1f, -1f));
 
     }
 
@@ -122,9 +123,9 @@ public class TheoreticalSuperAutoRedSlow extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, null));
 
 
-        autoNav.AddTask(new MovementTask((long) (900), -90, -1f, 1f));
+        autoNav.AddTask(new MovementTask((long) (900), 90, 1f, 1f));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask((long) (500/speed), -90, 0, speed));
+        autoNav.AddTask(new MovementTask((long) (500/speed), 90, 0, speed));
         autoNav.AddTask(new MovementTask((long) (225/speed), 0, 0, speed));
 
         autoNav.AddTask(new WaitTask(500));
@@ -136,8 +137,8 @@ public class TheoreticalSuperAutoRedSlow extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
 
         autoNav.AddTask(new MovementTask((long) (225/speed), 0, 0, -speed));
-        autoNav.AddTask(new MovementTask((long) (500/speed), -90, 0, -speed));
-        autoNav.AddTask(new MovementTask((long) (900), -90, -1f, -1f));
+        autoNav.AddTask(new MovementTask((long) (500/speed), 90, 0, -speed));
+        autoNav.AddTask(new MovementTask((long) (900), 90, 1f, -1f));
 
     }
 
@@ -146,11 +147,9 @@ public class TheoreticalSuperAutoRedSlow extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, null));
 
 
-        autoNav.AddTask(new MovementTask((long) (900), -90, -1f, 1f));
+        autoNav.AddTask(new MovementTask((long) (900), 90, 1f, 1f));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask((long) (400/speed), -90, 0, speed));
-
-
+        autoNav.AddTask(new MovementTask((long) (400/speed), 90, 0, speed));
         autoNav.AddTask(new MovementTask((long) (430/speed), 0, 0, speed));
 
         autoNav.AddTask(new WaitTask(500));
@@ -160,8 +159,8 @@ public class TheoreticalSuperAutoRedSlow extends AutoBase {
         autoNav.AddTask(new WaitTask(2000));
 
         autoNav.AddTask(new MovementTask((long) (430/speed), 0, 0, -speed));
-        autoNav.AddTask(new MovementTask((long) (375/speed), -90, 0, -speed));
-        autoNav.AddTask(new MovementTask((long) (900), -90, -1f, -1f));
+        autoNav.AddTask(new MovementTask((long) (375/speed), 90, 0, -speed));
+        autoNav.AddTask(new MovementTask((long) (900), 90, 1f, -1f));
 
         //autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.outtakeSpeed));
         //autoNav.AddTask(new MovementTask(500,-90, 1f, 0.5f));
@@ -172,9 +171,9 @@ public class TheoreticalSuperAutoRedSlow extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, null));
 
 
-        autoNav.AddTask(new MovementTask((long) (900), -90, -1f, 1f));
+        autoNav.AddTask(new MovementTask((long) (900), 90, 1f, 1f));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask((long) (375/speed), -90, 0, speed));
+        autoNav.AddTask(new MovementTask((long) (375/speed), 90, 0, speed));
         autoNav.AddTask(new MovementTask((long) (450/speed), 0, 0, speed));
 
         autoNav.AddTask(new WaitTask(500));
@@ -184,14 +183,14 @@ public class TheoreticalSuperAutoRedSlow extends AutoBase {
         autoNav.AddTask(new WaitTask(1000));
 
         autoNav.AddTask(new MovementTask((long) (450/speed), 0, 0, -speed));
-        autoNav.AddTask(new MovementTask((long) (375/speed), -90, 0, -speed));
-        autoNav.AddTask(new MovementTask((long) (900), -90, -1f, -1f));
+        autoNav.AddTask(new MovementTask((long) (375/speed), 90, 0, -speed));
+        autoNav.AddTask(new MovementTask((long) (900), 90, 1f, -1f));
 
         //autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.outtakeSpeed));
         //autoNav.AddTask(new MovementTask(500,-90, 1f, 0.5f));
     }
     @Override
     public RobotSide GetSide() {
-        return RobotSide.Red;
+        return RobotSide.Blue;
     }
 }
