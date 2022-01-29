@@ -60,7 +60,8 @@ public class PlacePickupPlaceWarehouseParkBlue extends AutoBase {
 
         autoNav.AddTask(new ArmTask(1000, null));
         //autoNav.AddTask(new MovementTask(1500,-90, 0, -0.5f));
-        autoNav.AddTask(new MovementTask(1200, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(3500, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(2300, -90, 0, 0.5f));
         autoNav.AddTask(new MovementTask(1700,-1, -0.5f));
     }
 
@@ -90,7 +91,7 @@ public class PlacePickupPlaceWarehouseParkBlue extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.intake, RobotConfig.intakeSpeed));
         autoNav.AddTask(new MovementTask(1500, -10, 0, 1f));
         autoNav.AddTask(new ArmTask(1200, RobotConfig.intakeSpeed));
-        autoNav.AddTask(new MovementTask(1300, -170, 0, 1f));
+        autoNav.AddTask(new MovementTask(1350, -170, 0, 1f));
 
         //Get ready to place again
 
@@ -141,7 +142,7 @@ public class PlacePickupPlaceWarehouseParkBlue extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.intakeSpeed));
         //autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(700, 0, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(900, 0, 0, 0.5f));
         autoNav.AddTask(new MovementTask(50, 0, 10, 0.5f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
