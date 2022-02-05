@@ -47,7 +47,7 @@ public abstract class OpModeBase extends DiOpMode {
 
         Container.BindInstance(hardwareMap.get(RevColorSensorV3.class, RobotConfig.freightSensorName)).WithId("freightSensor");
         //Container.BindInstance(hardwareMap.get(RevBlinkinLedDriver.class, RobotConfig.ledLightsName)).WithId("LEDLights");
-
+        Container.BindInstance(hardwareMap.get(Rev2mDistanceSensor.class, RobotConfig.distanceSensorName)).WithId("distanceSensor");
         Container.BindInstance(telemetry);
 
         Container.Bind(Drivetrain.class).AsSingle();

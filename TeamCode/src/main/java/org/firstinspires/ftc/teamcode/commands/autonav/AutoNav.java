@@ -33,8 +33,8 @@ public class AutoNav implements DiInterfaces.IInitializable, DiInterfaces.ITicka
     @DiContainer.Inject()
     public ComputerVision computerVision;
 
-    //@DiContainer.Inject(id="leftDistance")
-    //public Rev2mDistanceSensor leftDistance;
+    @DiContainer.Inject(id="distanceSensor")
+    public Rev2mDistanceSensor distanceSensor;
 
     //@DiContainer.Inject(id="rightDistance")
     //public Rev2mDistanceSensor rightDistance;

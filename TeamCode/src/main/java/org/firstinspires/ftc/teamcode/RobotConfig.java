@@ -23,7 +23,7 @@ public class RobotConfig {
     public static String armButtonName = "armButton";
 
     public static String intakeReleaseServoName = "intakeRelease";
-
+    public static String distanceSensorName = "distanceSensor";
     public static final String freightSensorName = "freightSensor";
     public static final String ledLightsName = "LEDLights";
     public static double armSpeed = 1;//0.35;
