@@ -28,15 +28,20 @@ public class toDistanceTask extends Task {
 
     @Override
     public boolean Execute() {
+
         double currentPoint = autoNav.distanceSensor.getDistance(DistanceUnit.CM);
         autoNav.telemetry.addData("Distance:", currentPoint);
-        if (Math.abs(currentPoint-distanceGoal)< 5) return true;
+        if (Math.abs(currentPoint-distanceGoal)< 20) speed -= 0.1;
+        if (Math.abs(currentPoint-distanceGoal)< 10) speed -= 0.1;
+        if (Math.abs(currentPoint-distanceGoal)< 5)  speed /= 2;
+        if(speed < 0.1){ speed = 0.1;}
+        //if (Math.abs(currentPoint-distanceGoal)< 0.5) return true;
 
         else if (currentPoint-distanceGoal< 0){
-            autoNav.drivetrain.TankDrive(-speed, speed);
+            autoNav.drivetrain.TankDrive(speed, -speed);
         }
         else if (currentPoint-distanceGoal>0){
-            autoNav.drivetrain.TankDrive(speed, -speed);
+            autoNav.drivetrain.TankDrive(-speed, speed);
         }
         return false;
     }
