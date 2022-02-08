@@ -31,6 +31,9 @@ public class RobotConfig {
     public static double outtakeSpeed = 0.35;
 
     public static double spinnerSpeed = 0.85;
+    public static double spinnerStart = 0.5;
+    public static double spinnerEnd = 1.0;
+    public static float spinnerRate = 400f;
 
     public static double turboDriveSpeed = 0.6;
     public static double fastDriveSpeed = 0.6;//.75
@@ -40,7 +43,7 @@ public class RobotConfig {
     public static int maxArmAngle = 2250;
 
     public static double intakeReleaseBlockAngle = 0.45;
-    public static double intakeReleaseLeaveAngle = 0.20;
+    public static double intakeReleaseLeaveAngle = 0.15;
 
     public static final String colorSensor1ConfigFileName = "COLOR_SENSOR_CALIBRATION1.json";
 

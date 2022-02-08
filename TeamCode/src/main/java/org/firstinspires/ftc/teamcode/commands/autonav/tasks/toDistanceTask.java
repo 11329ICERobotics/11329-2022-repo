@@ -35,7 +35,7 @@ public class toDistanceTask extends Task {
         if (Math.abs(currentPoint-distanceGoal)< 10) speed -= 0.1;
         if (Math.abs(currentPoint-distanceGoal)< 5)  speed /= 2;
         if(speed < 0.1){ speed = 0.1;}
-        //if (Math.abs(currentPoint-distanceGoal)< 0.5) return true;
+        if (Math.abs(currentPoint-distanceGoal)< 0.5) return true;
 
         else if (currentPoint-distanceGoal< 0){
             autoNav.drivetrain.TankDrive(speed, -speed);

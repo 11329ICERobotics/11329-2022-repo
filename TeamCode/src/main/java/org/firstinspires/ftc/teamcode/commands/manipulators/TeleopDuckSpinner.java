@@ -22,12 +22,26 @@ public class TeleopDuckSpinner implements DiInterfaces.ITickable {
     @DiContainer.Inject()
     public Telemetry telemetry;
 
+    boolean beenSpinning = false;
+
     @Override
     public void Tick() {
         boolean spin = gamepad1.circle;
 
         telemetry.addData("Duck Spinning?", spin);
 
-        duckSpinner.Spin(spin);
+        if(spin == true){
+            if(beenSpinning == false){
+                duckSpinner.startSpin();
+            }
+            duckSpinner.SpinTeleop();
+            beenSpinning = true;
+        }
+        else{
+            duckSpinner.Dispose();
+            beenSpinning = false;
+        }
+
+
     }
 }
