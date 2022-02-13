@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.commands.drivetrain;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
@@ -26,6 +27,7 @@ public class TeleopDrive implements DiInterfaces.ITickable {
     public boolean isHoldingFast = false;
 
     public boolean isHoldingTurbo = false;
+    public boolean isTurbo = false;
     @Override
     public void Tick() {
         double vertical = -powerCurve(gamepad1.left_stick_y);
@@ -45,11 +47,36 @@ public class TeleopDrive implements DiInterfaces.ITickable {
             isHoldingFast = false;
         }
 
-        speed =  (isFast ? RobotConfig.fastDriveSpeed : RobotConfig.slowDriveSpeed);
-
         if(gamepad1.left_bumper){
+            if(!isHoldingTurbo){
+                isTurbo = !isTurbo;
+                isHoldingTurbo = true;
+            }
+        }
+        else{
+            isHoldingTurbo = false;
+        }
+
+        if(isFast && isTurbo){
+            if(gamepad1.left_bumper){
+                isFast = false;
+            }
+            else if(gamepad1.square){
+                isTurbo = false;
+            }
+        }
+        if(isTurbo){
             speed = RobotConfig.turboDriveSpeed;
         }
+        else if(isFast){
+            speed = RobotConfig.fastDriveSpeed;
+        }
+        else{
+            speed = RobotConfig.slowDriveSpeed;
+        }
+        //speed =  (isFast ? RobotConfig.fastDriveSpeed : RobotConfig.slowDriveSpeed);
+
+
 
         drivetrain.MecanumDrive(vertical, horizontal, rotational,speed);
         //drivetrain.TankDrive(horizontal, rotational);

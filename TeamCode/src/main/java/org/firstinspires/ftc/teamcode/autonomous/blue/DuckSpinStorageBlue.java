@@ -59,7 +59,7 @@ public class DuckSpinStorageBlue extends AutoBase {
         autoNav.AddTask(new MovementTask(RobotConfig.msForOneDuckSpin, 180, 0, 0.01f));
         autoNav.AddTask(new DuckSpinTask(false));
 
-        autoNav.AddTask(new MovementTask(3000, 90, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(3300, 90, 0, 0.25f));
         autoNav.AddTask(new MovementTask(1500, 180, 0, 0.25f));
 
         /*autoNav.AddTask(new MovementTask(4000, -260, 0.5f, 0.25f));

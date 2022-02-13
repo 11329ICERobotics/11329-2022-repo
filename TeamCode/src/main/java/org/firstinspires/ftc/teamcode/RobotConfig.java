@@ -35,9 +35,9 @@ public class RobotConfig {
     public static double spinnerEnd = 1.0;
     public static float spinnerRate = 400f;
 
-    public static double turboDriveSpeed = 0.6;
-    public static double fastDriveSpeed = 0.6;//.75
-    public static double slowDriveSpeed = 0.4;//.75
+    public static double turboDriveSpeed = 0.35;
+    public static double fastDriveSpeed = 0.8;//.75
+    public static double slowDriveSpeed = 0.5;//.75
 
     public static int minArmAngle = 0;
     public static int maxArmAngle = 2250;
@@ -53,12 +53,12 @@ public class RobotConfig {
     public static final RevBlinkinLedDriver.BlinkinPattern absentPattern = RevBlinkinLedDriver.BlinkinPattern.WHITE;
 
     public static class ArmPresets {
-        public static int intake = 2250;
+        public static int intake = 2220;
         public static int startingConfig = 550;
 
         public static int frontFirst = 1360;
-        public static int frontSecond = 1600;
-        public static int frontThird = 1900;
+        public static int frontSecond = 1650;
+        public static int frontThird = 1850;
 
         public static int backFirst = 0;
         public static int backSecond = 0;

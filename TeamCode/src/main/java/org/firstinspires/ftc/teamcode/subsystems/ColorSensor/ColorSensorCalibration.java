@@ -2,21 +2,21 @@ package org.firstinspires.ftc.teamcode.subsystems.ColorSensor;
 
 
 public class ColorSensorCalibration {
-    public int absentRed = 0;
-    public int absentGreen = 0;
-    public int absentBlue = 0;
+    public static int absentRed = 128;
+    public static int absentGreen = 186;
+    public static int absentBlue = 114;
 
-    public int presentBlockRed = 0;
-    public int presentBlockGreen = 0;
-    public int presentBlockBlue = 0;
+    public static int presentBlockRed = 638;
+    public static int presentBlockGreen = 780;
+    public static int presentBlockBlue = 206;
 
-    public int presentBallRed = 0;
-    public int presentBallGreen = 0;
-    public int presentBallBlue = 0;
+    public static int presentBallRed = 8570;
+    public static int presentBallGreen = 15120;
+    public static int presentBallBlue = 11160;
 
-    public int presentDuckRed = 0;
-    public int presentDuckGreen = 0;
-    public int presentDuckBlue = 0;
+    public static int presentDuckRed = 370;
+    public static int presentDuckGreen = 573;
+    public static int presentDuckBlue = 178;
 
     public ColorSensorCalibration() {
 
