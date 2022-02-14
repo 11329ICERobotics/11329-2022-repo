@@ -22,8 +22,8 @@ public class pickupDetection implements DiInterfaces.IInitializable , DiInterfac
 
     @DiContainer.Inject
     public Telemetry telemetry;
-    //@DiContainer.Inject(id="LEDLights")
-    //public RevBlinkinLedDriver leds;
+    @DiContainer.Inject(id="LEDLights")
+    public RevBlinkinLedDriver leds;
 
     public ColorSensorCalibration colorSensor1Calibration = new ColorSensorCalibration();
     public freightType freightPresent = freightType.Block;
@@ -53,7 +53,7 @@ public class pickupDetection implements DiInterfaces.IInitializable , DiInterfac
         freightPresent = currentFreightCarried();
 
         telemetry.addData("Present Freight:", freightPresent);
-        /*
+
 
         if(freightPresent == freightType.Absent){
             pattern = RobotConfig.absentPattern;
@@ -67,6 +67,6 @@ public class pickupDetection implements DiInterfaces.IInitializable , DiInterfac
         if(freightPresent == freightType.Duck){
             pattern = RobotConfig.duckPattern;
         }
-        leds.setPattern(pattern);*/
+        leds.setPattern(pattern);
     }
 }

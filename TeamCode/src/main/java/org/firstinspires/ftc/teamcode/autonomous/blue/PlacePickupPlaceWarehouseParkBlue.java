@@ -69,7 +69,7 @@ public class PlacePickupPlaceWarehouseParkBlue extends AutoBase {
         //autoNav.AddTask(new MovementTask(1500,-90, 0, -0.5f));
         autoNav.AddTask(new MovementTask(2500, 90, 0, 0.5f));
         autoNav.AddTask(new MovementTask(1300, -90, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(1900,-1, -0.5f));
+        autoNav.AddTask(new MovementTask(1800,-1, -0.5f));
     }
     public void removeElementOne(){
         autoNav.AddTask(new ArmTask(1000, null));
@@ -119,8 +119,8 @@ public class PlacePickupPlaceWarehouseParkBlue extends AutoBase {
     public void Pickup() {
         telemetry.log().add("started PICKUP");
         autoNav.AddTask(new ArmTask(1200, null));
-        autoNav.AddTask(new MovementTask(1800,-1, 0.5f));
-        autoNav.AddTask(new MovementTask(1500, -90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(1700,-1, 0.5f));
+        autoNav.AddTask(new MovementTask(1600, -90, 0, 0.5f));
 
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.intake, RobotConfig.intakeSpeed));
         //autoNav.AddTask(new toDistanceTask(50, 1f));
@@ -132,8 +132,8 @@ public class PlacePickupPlaceWarehouseParkBlue extends AutoBase {
         //Get ready to place again
 
         autoNav.AddTask(new ArmTask(1200, null));
-        autoNav.AddTask(new MovementTask(1200, 90, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(1500,-1, -0.6f));
+        autoNav.AddTask(new MovementTask(1300, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(1600,-1, -0.6f));
     }
 // posture check :)
     public void FirstPosition() {
@@ -167,6 +167,7 @@ public class PlacePickupPlaceWarehouseParkBlue extends AutoBase {
         //autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
         autoNav.AddTask(new MovementTask(800, 0, 0, 0.5f));
+        autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
