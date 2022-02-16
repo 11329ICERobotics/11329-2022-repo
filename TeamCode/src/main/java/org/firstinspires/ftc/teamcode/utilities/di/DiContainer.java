@@ -66,7 +66,9 @@ public class DiContainer {
         List<Object> values = ResolveAll(searchClass, context);
 
         if (values.size() > 1) throw new DiExceptions.MultipleInstancesFoundException();
-        if (values.size() < 1) throw new DiExceptions.InstanceNotFoundException();
+        if (values.size() < 1) {
+            throw new DiExceptions.InstanceNotFoundException();
+        }
 
         return values.get(0);
     }
@@ -88,9 +90,10 @@ public class DiContainer {
     }
 
     protected Object Inject(Object instance, DiContext context) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        Field[] fields = instance.getClass().getFields();
+        Field[] fields = instance.getClass().getDeclaredFields();
 
         for (Field field: fields) {
+            field.setAccessible(true);
             if (!field.isAnnotationPresent(Inject.class)) continue;
             Inject inject = field.getAnnotation(Inject.class);
 

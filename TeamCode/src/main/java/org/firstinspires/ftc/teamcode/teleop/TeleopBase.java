@@ -19,6 +19,5 @@ public abstract class TeleopBase extends OpModeBase {
         Container.Bind(TeleopDrive.class).AsSingle();
         Container.Bind(TeleopArm.class).AsSingle();
         Container.Bind(TeleopDuckSpinner.class).AsSingle();
-        Container.Bind(pickupDetection.class).AsSingle();
     }
 }

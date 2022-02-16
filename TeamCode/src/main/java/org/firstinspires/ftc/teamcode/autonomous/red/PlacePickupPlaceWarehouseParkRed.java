@@ -29,7 +29,7 @@ public class PlacePickupPlaceWarehouseParkRed extends AutoBase {
 
                 switch (autoNav.computerVision.GetBarcodeStatus()) {
                     case One:
-                        removeElementOne();
+                        removeElement();
                         FirstPosition();
                         Pickup();
                         FinalThirdPosition();
@@ -43,7 +43,7 @@ public class PlacePickupPlaceWarehouseParkRed extends AutoBase {
                         //dropNewFreightAndPark();
                         break;
                     case Three:
-                        removeElement();
+                        removeElementOne();
                         ThirdPosition();
                         Pickup();
                         FinalThirdPosition();
@@ -69,25 +69,25 @@ public class PlacePickupPlaceWarehouseParkRed extends AutoBase {
         //autoNav.AddTask(new MovementTask(1500,-90, 0, -0.5f));
         autoNav.AddTask(new MovementTask(2500, -90, 0, 0.5f));
         autoNav.AddTask(new MovementTask(1300, 90, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(1900,1, -0.5f));
+        autoNav.AddTask(new MovementTask(1800,1, -0.5f));
     }
     public void removeElementOne(){
         autoNav.AddTask(new ArmTask(1000, null));
         //autoNav.AddTask(new MovementTask(1500,-90, 0, -0.5f));
-        autoNav.AddTask(new MovementTask(300, 0, 0, 0.75f));
+        autoNav.AddTask(new MovementTask(250, 0, 0, 0.75f));
 
-        autoNav.AddTask(new MovementTask(2500, -90, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(1300, 90, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(300, 0, 0, -0.75f));
+        autoNav.AddTask(new MovementTask(2000, -90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(800, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(250, 0, 0, -0.75f));
 
-        autoNav.AddTask(new MovementTask(0,1, -1f));
+        autoNav.AddTask(new MovementTask(1875,1, -0.5f));
     }
 
 
     public void Park() {
         telemetry.log().add("started PARK");
         autoNav.AddTask(new ArmTask(1000, null));
-        autoNav.AddTask(new MovementTask(1125,1, 0.8f));
+        autoNav.AddTask(new MovementTask(1150,1, 0.8f));
         //autoNav.AddTask(new MovementTask(1500,-90, 0, 0.5f));
         autoNav.AddTask(new MovementTask(2000, 0, 0, 1f));
         /*autoNav.AddTask(new MovementTask(1300, 90, 0, 0.5f));
@@ -103,7 +103,7 @@ public class PlacePickupPlaceWarehouseParkRed extends AutoBase {
     public void PosOnePark() {
         telemetry.log().add("started PARK");
         autoNav.AddTask(new ArmTask(1000, null));
-        autoNav.AddTask(new MovementTask(0,1, 0.8f));
+        autoNav.AddTask(new MovementTask(1120,1, 1f));
         autoNav.AddTask(new MovementTask(1500,90, 0, 0.5f));
         autoNav.AddTask(new MovementTask(2000, 0, 0, 0.75f));
         /*autoNav.AddTask(new MovementTask(1300, 90, 0, 0.5f));
@@ -119,33 +119,33 @@ public class PlacePickupPlaceWarehouseParkRed extends AutoBase {
     public void Pickup() {
         telemetry.log().add("started PICKUP");
         autoNav.AddTask(new ArmTask(1200, null));
-        autoNav.AddTask(new MovementTask(1900,1, 0.5f));
-        autoNav.AddTask(new MovementTask(1500, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(1700,1, 0.5f));
+        autoNav.AddTask(new MovementTask(1600, 90, 0, 0.5f));
 
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.intake, RobotConfig.intakeSpeed));
         //autoNav.AddTask(new toDistanceTask(50, 1f));
         autoNav.AddTask(new MovementTask(1400, 10, 0, 1f));
         autoNav.AddTask(new ArmTask(1200, RobotConfig.intakeSpeed));
         autoNav.AddTask(new toDistanceTask(100, 0.5f));
-        autoNav.AddTask(new MovementTask(550, 170, 0, 1f));
+        autoNav.AddTask(new MovementTask(550, -190, 0, 1f));
 
         //Get ready to place again
 
         autoNav.AddTask(new ArmTask(1200, null));
-        autoNav.AddTask(new MovementTask(1200, -90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(1300, -90, 0, 0.5f));
         autoNav.AddTask(new MovementTask(1500,1, -0.6f));
     }
-
+    // posture check :)
     public void FirstPosition() {
         telemetry.log().add("started FIRST");
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, RobotConfig.intakeSpeed));
         //autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(275, 0, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(375, 0, 0, 0.5f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, 0.0));
-        autoNav.AddTask(new MovementTask(600, 180, 0, 0.5f)); //0050
+        autoNav.AddTask(new MovementTask(650, 180, 0, 0.5f)); //0050
         //autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
 
@@ -167,6 +167,7 @@ public class PlacePickupPlaceWarehouseParkRed extends AutoBase {
         //autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
         autoNav.AddTask(new MovementTask(800, 0, 0, 0.5f));
+        autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));

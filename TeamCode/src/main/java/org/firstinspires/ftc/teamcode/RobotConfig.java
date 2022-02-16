@@ -19,7 +19,7 @@ public class RobotConfig {
     public static String rightDistanceName = "rightDistance";
     public static String frontDistanceName = "frontDistance";
     public static String backDistanceName = "backDistance";
-
+    public static String IMUName = "IMU";
     public static String armButtonName = "armButton";
 
     public static String intakeReleaseServoName = "intakeRelease";

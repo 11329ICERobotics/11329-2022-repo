@@ -17,9 +17,6 @@ public class pickupDetection implements DiInterfaces.IInitializable , DiInterfac
     @DiContainer.Inject(id="freightSensor")
     public RevColorSensorV3 freightColorSensor;
 
-    @DiContainer.Inject(id="gamepad1")
-    public Gamepad gamepad1;
-
     @DiContainer.Inject
     public Telemetry telemetry;
     @DiContainer.Inject(id="LEDLights")
