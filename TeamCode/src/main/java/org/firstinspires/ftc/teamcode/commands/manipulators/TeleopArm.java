@@ -38,7 +38,7 @@ public class TeleopArm implements DiInterfaces.ITickable {
         if (gamepad2.dpad_down) armAngle = RobotConfig.ArmPresets.frontThird;
 
         if (gamepad2.cross) armAngle = RobotConfig.ArmPresets.backFirst;
-        if (gamepad2.circle) armAngle = RobotConfig.ArmPresets.backSecond;
+        //if (gamepad2.circle) armAngle = RobotConfig.ArmPresets.backSecond;
         if (gamepad2.triangle) armAngle = RobotConfig.ArmPresets.backThird;
 
 

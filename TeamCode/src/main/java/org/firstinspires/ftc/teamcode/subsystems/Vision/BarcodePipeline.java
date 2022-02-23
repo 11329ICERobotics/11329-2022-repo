@@ -67,13 +67,14 @@ public class BarcodePipeline extends OpenCvPipeline {
 
         Core.split(cropped, channels);
 
-        if (side == RobotSide.Red) { // Invert this after testing is complete
+        if (side == RobotSide.Red || side == RobotSide.JankTwo) { // Invert this after testing is complete
             Core.inRange(cropped, new Scalar(0, 70, 100), new Scalar(10, 255, 255), redtmp1);
             Core.inRange(cropped, new Scalar(170, 70, 100), new Scalar(180, 255, 255), redtmp2);
 
             Core.bitwise_or(redtmp1, redtmp2, thresholded);
         } else {
-            Core.inRange(cropped, new Scalar(110, 70, 100), new Scalar(116, 255, 255), thresholded);
+            //Core.inRange(cropped, new Scalar(186, 60, 67), new Scalar(), thresholded);
+            Core.inRange(cropped, new Scalar(100, 70, 100), new Scalar(120, 255, 255), thresholded);
         }
 
         leftThird = thresholded.colRange(0, thresholded.cols() / 3);

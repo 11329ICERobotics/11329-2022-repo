@@ -9,6 +9,7 @@ public class RobotConfig {
     public static String backLeftMotorName = "backLeft";
     public static String backRightMotorName = "backRight";
 
+
     public static String armMotorName = "armMotor";
 
     public static String intakeMotorName = "intakeMotor";
@@ -26,7 +27,16 @@ public class RobotConfig {
     public static String distanceSensorName = "distanceSensor";
     public static final String freightSensorName = "freightSensor";
     public static final String ledLightsName = "LEDLights";
-    public static double armSpeed = 1;//0.35;
+
+    public static String yawMotorName = "yawMotor";
+    public static String pitchMotorName = "pitchMotor";
+    public static String distanceMotorName = "distanceMotor";
+
+    public static double yawMotorSpeed = 0.5;
+    public static double pitchMotorSpeed = 0.5;
+    public static double distanceMotorSpeed = 0.5;
+
+    public static double armSpeed = 0.5;//0.35;
     public static double intakeSpeed = 0.5;
     public static double outtakeSpeed = 0.35;
 
@@ -43,8 +53,9 @@ public class RobotConfig {
     public static int maxArmAngle = 2250;
 
     public static double intakeReleaseBlockAngle = 0.45;
-    public static double intakeReleaseLeaveAngle = 0.15;
+    public static double intakeReleaseLeaveAngle = 0.10;
 
+    public static boolean capMode = false;
     public static final String colorSensor1ConfigFileName = "COLOR_SENSOR_CALIBRATION1.json";
 
     public static final RevBlinkinLedDriver.BlinkinPattern blockPattern = RevBlinkinLedDriver.BlinkinPattern.ORANGE;
@@ -60,7 +71,7 @@ public class RobotConfig {
         public static int frontSecond = 1650;
         public static int frontThird = 1850;
 
-        public static int backFirst = 0;
+        public static int backFirst = 686;
         public static int backSecond = 0;
         public static int backThird = 0;
     }

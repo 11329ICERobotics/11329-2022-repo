@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
+import org.firstinspires.ftc.teamcode.commands.manipulators.TeleopCapper;
 import org.firstinspires.ftc.teamcode.subsystems.ColorSensor.pickupDetection;
 import org.firstinspires.ftc.teamcode.utilities.OpModeBase;
 import org.firstinspires.ftc.teamcode.commands.drivetrain.TeleopDrive;
@@ -19,5 +20,6 @@ public abstract class TeleopBase extends OpModeBase {
         Container.Bind(TeleopDrive.class).AsSingle();
         Container.Bind(TeleopArm.class).AsSingle();
         Container.Bind(TeleopDuckSpinner.class).AsSingle();
+        //Container.Bind(TeleopCapper.class).AsSingle();
     }
 }

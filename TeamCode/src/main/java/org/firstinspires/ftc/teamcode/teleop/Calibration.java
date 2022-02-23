@@ -27,7 +27,7 @@ public class Calibration extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        freightSensor = hardwareMap.get(RevColorSensorV3.class, "firstRingSensor");
+        freightSensor = hardwareMap.get(RevColorSensorV3.class, "freightSensor");
 
         colorSensor1Calibration = new ColorSensorCalibration();
 

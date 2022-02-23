@@ -4,4 +4,5 @@ public enum RobotSide {
     Red,
     Blue,
     Jank,
+    JankTwo,
 }
