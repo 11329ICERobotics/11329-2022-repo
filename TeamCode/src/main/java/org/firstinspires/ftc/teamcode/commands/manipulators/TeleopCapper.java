@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Capper.Capper;
 import org.firstinspires.ftc.teamcode.utilities.di.DiContainer;
 import org.firstinspires.ftc.teamcode.utilities.di.DiInterfaces;
 
-public class TeleopCapper implements DiInterfaces.ITickable{
+public class TeleopCapper implements DiInterfaces.ITickable, DiInterfaces.IDisposable {
     @DiContainer.Inject()
     public Capper capper;
 
@@ -22,7 +22,7 @@ public class TeleopCapper implements DiInterfaces.ITickable{
 
     @Override
     public void Tick() {
-        if(gamepad2.circle){
+        if(gamepad2.x){
             if(holdingCapMode == false) {
                 holdingCapMode = true;
                 if(RobotConfig.capMode == false) {
@@ -40,13 +40,21 @@ public class TeleopCapper implements DiInterfaces.ITickable{
         }
         if(RobotConfig.capMode == true){
             capper.setYawMovement(gamepad2.left_stick_x);
-            capper.setPitchMovement(gamepad2.left_stick_y);
+            capper.setPitchMovement(gamepad2.left_stick_y * RobotConfig.pitchMotorSpeed);
             if(gamepad2.left_bumper){
                 capper.setDistanceMovement(RobotConfig.distanceMotorSpeed);
             }
             else if(gamepad2.right_bumper){
                 capper.setDistanceMovement(-RobotConfig.distanceMotorSpeed);
             }
+            else{
+                capper.setDistanceMovement(0.0);
+            }
         }
     }
+    @Override
+    public void Dispose(){
+        RobotConfig.capMode = false;
+    }
+
 }

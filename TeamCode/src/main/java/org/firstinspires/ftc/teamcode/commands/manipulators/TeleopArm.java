@@ -28,7 +28,7 @@ public class TeleopArm implements DiInterfaces.ITickable {
     @Override
     public void Tick() {
         //armAngle += (int) Math.round(-gamepad2.right_stick_y * RobotConfig.armSpeed);
-
+    if(RobotConfig.capMode == false) {
 
         if (gamepad2.square) armAngle = RobotConfig.ArmPresets.startingConfig;
         if (gamepad2.dpad_right) armAngle = RobotConfig.ArmPresets.intake;
@@ -67,5 +67,6 @@ public class TeleopArm implements DiInterfaces.ITickable {
 
         arm.Run(armAngle, intakeSpeed);
         arm.MoveServo(blockIntake);
+    }
     }
 }

@@ -12,6 +12,8 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.teamcode.RobotConfig;
+import org.firstinspires.ftc.teamcode.commands.manipulators.TeleopCapper;
+import org.firstinspires.ftc.teamcode.subsystems.Capper.Capper;
 import org.firstinspires.ftc.teamcode.subsystems.ColorSensor.pickupDetection;
 import org.firstinspires.ftc.teamcode.subsystems.angleMeasure.IMUClass;
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
@@ -30,9 +32,9 @@ public abstract class OpModeBase extends DiOpMode {
     public void Install() throws IllegalAccessException, InstantiationException, InvocationTargetException {
         Container.BindInstance(GetSide());
 
-        //Container.BindInstance(hardwareMap.get(CRServo.class, RobotConfig.yawMotorName)).WithId("yawMotor");
-        //Container.BindInstance(hardwareMap.get(CRServo.class, RobotConfig.pitchMotorName)).WithId("pitchMotor");
-        //Container.BindInstance(hardwareMap.get(CRServo.class, RobotConfig.distanceMotorName)).WithId("distanceMotor");
+        Container.BindInstance(hardwareMap.get(Servo.class, RobotConfig.yawMotorName)).WithId("yawMotor");
+        Container.BindInstance(hardwareMap.get(CRServo.class, RobotConfig.pitchMotorName)).WithId("pitchMotor");
+        Container.BindInstance(hardwareMap.get(CRServo.class, RobotConfig.distanceMotorName)).WithId("distanceMotor");
 
         Container.BindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.frontLeftMotorName)).WithId("frontLeftMotor");
         Container.BindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.frontRightMotorName)).WithId("frontRightMotor");
@@ -63,6 +65,7 @@ public abstract class OpModeBase extends DiOpMode {
         Container.Bind(Arm.class).AsSingle();
         Container.Bind(DuckSpinner.class).AsSingle();
         Container.Bind(pickupDetection.class).AsSingle();
+        Container.Bind(Capper.class).AsSingle();
 
         InstallLower();
     }

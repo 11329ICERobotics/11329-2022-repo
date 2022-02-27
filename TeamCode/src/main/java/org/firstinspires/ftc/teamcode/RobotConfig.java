@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 
-public class RobotConfig {
+public class  RobotConfig {
     public static int  possibleExtraBlocks = 3;
     public static String frontLeftMotorName = "frontLeft";
     public static String frontRightMotorName = "frontRight";
@@ -32,11 +32,11 @@ public class RobotConfig {
     public static String pitchMotorName = "pitchMotor";
     public static String distanceMotorName = "distanceMotor";
 
-    public static double yawMotorSpeed = 0.5;
+    public static double yawMotorSpeed = 0.02;
     public static double pitchMotorSpeed = 0.5;
-    public static double distanceMotorSpeed = 0.5;
+    public static double distanceMotorSpeed = 1;
 
-    public static double armSpeed = 0.5;//0.35;
+    public static double armSpeed = 1;//0.35;
     public static double intakeSpeed = 0.5;
     public static double outtakeSpeed = 0.35;
 
@@ -73,7 +73,7 @@ public class RobotConfig {
 
         public static int backFirst = 686;
         public static int backSecond = 0;
-        public static int backThird = 0;
+        public static int backThird = 170;
     }
 
     public static long msForOneDuckSpin = 3200;
