@@ -32,14 +32,18 @@ public class CappingTask extends Task {
     public boolean Execute() {
         now = System.currentTimeMillis();
         if(!distanceMet){
+            autoNav.telemetry.addData("Encoder in Autos", autoNav.capper.distanceEncoder.getCurrentPosition());
+            autoNav.telemetry.addData("Encoder Goal", distanceGoal);
+            autoNav.telemetry.addData("Greater", autoNav.capper.distanceEncoder.getCurrentPosition() < distanceGoal);
             if(autoNav.capper.distanceEncoder.getCurrentPosition() > distanceGoal) {
                 autoNav.capper.setDistanceMovement(1);
             }
-            else if (autoNav.capper.distanceEncoder.getCurrentPosition() < distanceGoal){
+            if (autoNav.capper.distanceEncoder.getCurrentPosition() < distanceGoal){
                 autoNav.capper.setDistanceMovement(-1);
             }
             if(Math.abs(autoNav.capper.distanceEncoder.getCurrentPosition()-distanceGoal) < 150){
                 distanceMet = true;
+                autoNav.capper.setDistanceMovement(0);
             }
         }
 
@@ -60,6 +64,6 @@ public class CappingTask extends Task {
 
     @Override
     public ETA GetETA() {
-        return null;
+        return new ETA(startTime, System.currentTimeMillis(), startTime + pitchTime);
     }
 }
