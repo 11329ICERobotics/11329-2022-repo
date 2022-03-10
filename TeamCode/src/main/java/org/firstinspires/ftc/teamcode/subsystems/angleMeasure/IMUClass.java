@@ -1,5 +1,5 @@
 package org.firstinspires.ftc.teamcode.subsystems.angleMeasure;
-
+/*
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 
@@ -30,7 +30,7 @@ public class IMUClass implements DiInterfaces.IInitializable, DiInterfaces.IDisp
 
     @Override
     public void Tick() {
-        telemetry.addData("Angle:", imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES));
+        //telemetry.addData("Angle:", imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES));
     }
 
     @Override
@@ -38,3 +38,4 @@ public class IMUClass implements DiInterfaces.IInitializable, DiInterfaces.IDisp
 
     }
 }
+*/

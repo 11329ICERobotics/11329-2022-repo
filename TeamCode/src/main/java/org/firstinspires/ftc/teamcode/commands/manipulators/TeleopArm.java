@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RobotConfig;
+import org.firstinspires.ftc.teamcode.subsystems.Capper.Capper;
 import org.firstinspires.ftc.teamcode.subsystems.manipulators.Arm;
 import org.firstinspires.ftc.teamcode.utilities.di.DiContainer;
 import org.firstinspires.ftc.teamcode.utilities.di.DiInterfaces;
@@ -17,6 +18,9 @@ public class TeleopArm implements DiInterfaces.ITickable {
 
     @DiContainer.Inject(id="gamepad2")
     public Gamepad gamepad2;
+
+    @DiContainer.Inject()
+    Capper capper;
 
     @DiContainer.Inject()
     public Telemetry telemetry;
@@ -39,8 +43,11 @@ public class TeleopArm implements DiInterfaces.ITickable {
 
         if (gamepad2.cross) armAngle = RobotConfig.ArmPresets.backFirst;
         //if (gamepad2.circle) armAngle = RobotConfig.ArmPresets.backSecond;
-        if (gamepad2.triangle) armAngle = RobotConfig.ArmPresets.backThird;
-
+        if (gamepad2.b) armAngle = RobotConfig.ArmPresets.backThird;
+        if(gamepad2.y){
+            //if(capper.yawPosition < RobotConfig.capperYawZero && arm.targetPosition )
+            armAngle = RobotConfig.ArmPresets.backThird;
+        }
 
         if (armAngle < RobotConfig.minArmAngle) armAngle = RobotConfig.minArmAngle;
         if (armAngle > RobotConfig.maxArmAngle) armAngle = RobotConfig.maxArmAngle;
@@ -67,6 +74,9 @@ public class TeleopArm implements DiInterfaces.ITickable {
 
         arm.Run(armAngle, intakeSpeed);
         arm.MoveServo(blockIntake);
+    }
+    if(RobotConfig.capMode == true){
+        arm.targetPosition = RobotConfig.ArmPresets.backThird;
     }
     }
 }

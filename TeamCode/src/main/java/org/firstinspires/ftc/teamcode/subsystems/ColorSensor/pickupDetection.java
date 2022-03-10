@@ -50,9 +50,7 @@ public class pickupDetection implements DiInterfaces.IInitializable , DiInterfac
         freightPresent = currentFreightCarried();
 
         telemetry.addData("Present Freight:", freightPresent);
-        telemetry.addData("Red:", freightColorSensor.red());
-        telemetry.addData("Green:", freightColorSensor.green());
-        telemetry.addData("Blue:", freightColorSensor.blue());
+
 
         if(freightPresent == freightType.Absent){
             pattern = RobotConfig.absentPattern;
@@ -67,5 +65,6 @@ public class pickupDetection implements DiInterfaces.IInitializable , DiInterfac
             pattern = RobotConfig.duckPattern;
         }
         leds.setPattern(pattern);
+        
     }
 }

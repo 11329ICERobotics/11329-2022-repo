@@ -1,7 +1,12 @@
 package org.firstinspires.ftc.teamcode.subsystems.ColorSensor;
 
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.utilities.di.DiContainer;
+
 public class ColorSensorCalibration {
+
+    
     double minValue;
     public static int absentRed = 80;
     public static int absentGreen = 130;
@@ -198,12 +203,16 @@ public class ColorSensorCalibration {
         allDistances[9] = presentBallFarSolidDistance;
         allDistances[10] = presentDuckDistance;
         allDistances[11] = presentDuckDistance;
+        allDistances[11] = absentDistance;
 
         double whichFreight = minimum(allDistances);
+
+
+        if(whichFreight == absentDistance) { return freightType.Absent;}
         if(whichFreight == presentBlockCloseSolidDistance || whichFreight == presentBlockFarSolidDistance || whichFreight == presentBlockMidHoleDistance || whichFreight == presentBlockFarHoleDistance){ return freightType.Block;}
         else if(whichFreight == presentBallCloseSolidDistance || whichFreight == presentBallFarSolidDistance || whichFreight == presentBallMidSolidDistance || whichFreight == presentBlockFarHoleDistance || whichFreight == presentBallMidHoleDistance || whichFreight == presentBallCloseSolidDistance){ return freightType.Ball;}
-        else if(whichFreight == presentDuckDistance){ return freightType.Duck;}
-        else { return freightType.Absent;}
+        else { return freightType.Duck;}
+
     }
     public  double minimum(double[] numbers){
         for(int i = 0; i< numbers.length; i++){

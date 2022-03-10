@@ -8,7 +8,7 @@ public class  RobotConfig {
     public static String frontRightMotorName = "frontRight";
     public static String backLeftMotorName = "backLeft";
     public static String backRightMotorName = "backRight";
-
+    public static String distanceEncoderName = "distanceEncoder";
 
     public static String armMotorName = "armMotor";
 
@@ -32,36 +32,39 @@ public class  RobotConfig {
     public static String pitchMotorName = "pitchMotor";
     public static String distanceMotorName = "distanceMotor";
 
-    public static double yawMotorSpeed = 0.02;
-    public static double pitchMotorSpeed = 0.5;
+    public static double yawMotorSpeed = 0.0005;
+    public static double pitchMotorSpeedSlow = 0.1;
+    public static double pitchMotorSpeedFast = 0.4;
     public static double distanceMotorSpeed = 1;
 
+    public static double capperYawZero = 0.4488888;
+
     public static double armSpeed = 1;//0.35;
-    public static double intakeSpeed = 0.5;
+    public static double intakeSpeed = 0.45;
     public static double outtakeSpeed = 0.35;
 
     public static double spinnerSpeed = 0.85;
     public static double spinnerStart = 0.5;
     public static double spinnerEnd = 1.0;
-    public static float spinnerRate = 400f;
+    public static float spinnerRate = 600f;
 
     public static double turboDriveSpeed = 0.35;
-    public static double fastDriveSpeed = 0.8;//.75
+    public static double fastDriveSpeed = 0.9;//.75
     public static double slowDriveSpeed = 0.5;//.75
 
     public static int minArmAngle = 0;
     public static int maxArmAngle = 2250;
 
     public static double intakeReleaseBlockAngle = 0.45;
-    public static double intakeReleaseLeaveAngle = 0.10;
+    public static double intakeReleaseLeaveAngle = 0.0;
 
     public static boolean capMode = false;
     public static final String colorSensor1ConfigFileName = "COLOR_SENSOR_CALIBRATION1.json";
 
     public static final RevBlinkinLedDriver.BlinkinPattern blockPattern = RevBlinkinLedDriver.BlinkinPattern.ORANGE;
-    public static final RevBlinkinLedDriver.BlinkinPattern ballPattern = RevBlinkinLedDriver.BlinkinPattern.GREEN;
+    public static final RevBlinkinLedDriver.BlinkinPattern ballPattern = RevBlinkinLedDriver.BlinkinPattern.WHITE;
     public static final RevBlinkinLedDriver.BlinkinPattern duckPattern = RevBlinkinLedDriver.BlinkinPattern.YELLOW;
-    public static final RevBlinkinLedDriver.BlinkinPattern absentPattern = RevBlinkinLedDriver.BlinkinPattern.WHITE;
+    public static final RevBlinkinLedDriver.BlinkinPattern absentPattern = RevBlinkinLedDriver.BlinkinPattern.BLACK;
 
     public static class ArmPresets {
         public static int intake = 2220;

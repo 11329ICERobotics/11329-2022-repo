@@ -53,6 +53,7 @@ public class Arm implements DiInterfaces.IInitializable, DiInterfaces.ITickable,
     public void Tick() {
         if (runToTarget) {
             if (!IsArmDoneMoving()) {
+
                 armMotor.setPower(Math.copySign(GetArmPower(), GetArmError()));
             } else {
                 armMotor.setPower(0);

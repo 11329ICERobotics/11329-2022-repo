@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.utilities;
 
+import android.graphics.Color;
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
@@ -14,8 +16,9 @@ import com.qualcomm.robotcore.robot.Robot;
 import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.commands.manipulators.TeleopCapper;
 import org.firstinspires.ftc.teamcode.subsystems.Capper.Capper;
+import org.firstinspires.ftc.teamcode.subsystems.ColorSensor.ColorSensorCalibration;
 import org.firstinspires.ftc.teamcode.subsystems.ColorSensor.pickupDetection;
-import org.firstinspires.ftc.teamcode.subsystems.angleMeasure.IMUClass;
+
 import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.subsystems.manipulators.Arm;
 import org.firstinspires.ftc.teamcode.subsystems.manipulators.DuckSpinner;
@@ -32,6 +35,7 @@ public abstract class OpModeBase extends DiOpMode {
     public void Install() throws IllegalAccessException, InstantiationException, InvocationTargetException {
         Container.BindInstance(GetSide());
 
+        Container.BindInstance(hardwareMap.get(DcMotorEx.class, RobotConfig.distanceEncoderName)).WithId("distanceEncoder");
         Container.BindInstance(hardwareMap.get(Servo.class, RobotConfig.yawMotorName)).WithId("yawMotor");
         Container.BindInstance(hardwareMap.get(CRServo.class, RobotConfig.pitchMotorName)).WithId("pitchMotor");
         Container.BindInstance(hardwareMap.get(CRServo.class, RobotConfig.distanceMotorName)).WithId("distanceMotor");
@@ -60,13 +64,13 @@ public abstract class OpModeBase extends DiOpMode {
         Container.BindInstance(hardwareMap.get(Rev2mDistanceSensor.class, RobotConfig.distanceSensorName)).WithId("distanceSensor");
         Container.BindInstance(telemetry);
 
-        Container.Bind(IMUClass.class).AsSingle();
+
         Container.Bind(Drivetrain.class).AsSingle();
         Container.Bind(Arm.class).AsSingle();
         Container.Bind(DuckSpinner.class).AsSingle();
         Container.Bind(pickupDetection.class).AsSingle();
         Container.Bind(Capper.class).AsSingle();
-
+        Container.Bind(ColorSensorCalibration.class).AsSingle();
         InstallLower();
     }
 }

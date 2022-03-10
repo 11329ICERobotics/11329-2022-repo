@@ -75,6 +75,6 @@ public class Drivetrain implements DiInterfaces.IInitializable, DiInterfaces.IDi
         if (input < -1) return -1;
         if (input > 1) return 1;
 
-        return Math.pow(input, 3);
+        return Math.pow(input, 3)/2;
     }
 }
