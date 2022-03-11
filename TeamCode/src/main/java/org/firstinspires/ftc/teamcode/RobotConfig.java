@@ -76,7 +76,7 @@ public class  RobotConfig {
 
         public static int backFirst = 686;
         public static int backSecond = 0;
-        public static int backThird = 170;
+        public static int backThird = 230;
     }
 
     public static long msForOneDuckSpin = 3200;

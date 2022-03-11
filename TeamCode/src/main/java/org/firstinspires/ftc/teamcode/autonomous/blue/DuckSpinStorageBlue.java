@@ -52,53 +52,41 @@ public class DuckSpinStorageBlue extends AutoBase {
 
     public void SpinDuck() {
         autoNav.AddTask(new ArmTask(1000, null));
-        autoNav.AddTask(new MovementTask(750, 90, 0, 0.25f));
-        autoNav.AddTask(new MovementTask(2000, 180, 0, 0.25f));
-
+        autoNav.AddTask(new MovementTask(1600, -260, 0.5f, 1f));
+        autoNav.AddTask(new MovementTask(300, -180, 0, 1f));
         autoNav.AddTask(new DuckSpinTask(true));
-        autoNav.AddTask(new MovementTask(RobotConfig.msForOneDuckSpin, 180, 0, 0.01f));
+        autoNav.AddTask(new MovementTask(RobotConfig.msForOneDuckSpin, -180, 0, 0.05f));
         autoNav.AddTask(new DuckSpinTask(false));
-
-        autoNav.AddTask(new MovementTask(3300, 90, 0, 0.25f));
-        autoNav.AddTask(new MovementTask(1500, 180, 0, 0.25f));
-
-        /*autoNav.AddTask(new MovementTask(4000, -260, 0.5f, 0.25f));
-        autoNav.AddTask(new MovementTask(1400, -180, 0, 0.25f));
-
-        autoNav.AddTask(new MovementTask(100,  0.1f, 0.5f));
-        autoNav.AddTask(new DuckSpinTask(true));
-        autoNav.AddTask(new MovementTask(RobotConfig.msForOneDuckSpin, 180, 0, 0.01f));
-        autoNav.AddTask(new DuckSpinTask(false));
-
-        autoNav.AddTask(new MovementTask(1400, 0, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(2000, -260, 0.5f, 0.25f));
-        autoNav.AddTask(new MovementTask(250, -270, 0, 0.5f));8?*/
+        autoNav.AddTask(new MovementTask(1000, 0, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(250, -270, 0, 0.5f));
     }
 
     public void FirstPosition() {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, RobotConfig.intakeSpeed));
         autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(5500, 90, 0, 0.25f));
-        autoNav.AddTask(new MovementTask(300, 0, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(6000, 90, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(500, -90, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(700, 0, 0, 0.25f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, 0.0));
-        autoNav.AddTask(new MovementTask(300, -180, 0, 0.25f));
-        autoNav.AddTask(new MovementTask(3000, -90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(700, -180, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
 
     public void SecondPosition() {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, RobotConfig.intakeSpeed));
         autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(5500, 90, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(6000, 90, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(500, -90, 0, 0.25f));
         autoNav.AddTask(new MovementTask(800, 0, 0, 0.25f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, 0.0));
         autoNav.AddTask(new MovementTask(800, -180, 0, 0.25f));
-        autoNav.AddTask(new MovementTask(3000, -90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
 
     public void ThirdPosition() {
@@ -111,7 +99,7 @@ public class DuckSpinStorageBlue extends AutoBase {
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
         autoNav.AddTask(new MovementTask(1300, -180, 0, 0.25f));
-        autoNav.AddTask(new MovementTask(3000, -90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
 
     @Override

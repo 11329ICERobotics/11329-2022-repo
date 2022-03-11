@@ -57,6 +57,7 @@ public class PlacePickupPlaceStraightPathRed extends AutoBase {
                         ThirdPosition();
                         Pickup();
                         FinalThirdPosition();
+                        Park();
                         //dropNewFreightAndPark();
                         break;
                 }
@@ -84,8 +85,9 @@ public class PlacePickupPlaceStraightPathRed extends AutoBase {
         autoNav.AddTask(new MovementTask(700, 180, 0, 1f));*/
         //autoNav.AddTask(new MovementTask(500, 0, -1, 1f));
         //autoNav.AddTask(new MovementTask(1000, 0, 0, 0.5f));
+
         autoNav.AddTask(new MovementTask(1000,1, 1f));
-        autoNav.AddTask(new MovementTask(2500, 0, 0, 1f));
+        autoNav.AddTask(new MovementTask(2500, 0, 0, 0.8f));
         //autoNav.AddTask(new MovementTask(1500, 0, 0, 1f));
 
     }
@@ -93,14 +95,15 @@ public class PlacePickupPlaceStraightPathRed extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, RobotConfig.intakeSpeed));
         autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(150, 0, 0, 1f));
+        //autoNav.AddTask(new MovementTask(150, 0, 0, 1f));
         autoNav.AddTask(new MovementTask(5700, 90, 0, 0.25f));
 
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, 0.0));
+
 
         autoNav.AddTask(new MovementTask(800, -90, 0, 1f));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
         autoNav.AddTask(new MovementTask(1200,1, 1f));
         autoNav.AddTask(new MovementTask(1000, 90, 0, 1f));
         autoNav.AddTask(new MovementTask(350, 0, 0, 1f));
@@ -110,11 +113,12 @@ public class PlacePickupPlaceStraightPathRed extends AutoBase {
         autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
         autoNav.AddTask(new MovementTask(5700, 90, 0, 0.25f));
-        autoNav.AddTask(new MovementTask(250, 0, 0, 1f));
+        autoNav.AddTask(new MovementTask(250, 0, 0, 0.5f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, 0.0));
+
         autoNav.AddTask(new MovementTask(300, -180, 0, 1f));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
         autoNav.AddTask(new MovementTask(800, -90, 0, 1f));
         autoNav.AddTask(new MovementTask(1200,1, 1f));
         autoNav.AddTask(new MovementTask(1000, 90, 0, 1f));
@@ -131,8 +135,9 @@ public class PlacePickupPlaceStraightPathRed extends AutoBase {
         autoNav.AddTask(new MovementTask(250, 0, 0, 1f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(1000));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
+
         autoNav.AddTask(new MovementTask(300, -180, 0, 1f));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
         autoNav.AddTask(new MovementTask(800, -90, 0, 1f));
         autoNav.AddTask(new MovementTask(1200,1, 1f));
         autoNav.AddTask(new MovementTask(1000, 90, 0, 1f));
@@ -142,7 +147,7 @@ public class PlacePickupPlaceStraightPathRed extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.intakeSpeed));
         //autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(500, 0, 0, 1f));
+        autoNav.AddTask(new MovementTask(950, 0, 0, 0.5f));
         //autoNav.AddTask(new MovementTask(50, 0, 10, 0.5f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(1500));
@@ -159,7 +164,7 @@ public class PlacePickupPlaceStraightPathRed extends AutoBase {
 
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.intake, RobotConfig.intakeSpeed));
         //autoNav.AddTask(new toDistanceTask(50, 1f));
-        autoNav.AddTask(new MovementTask(1400, 10, 0, 1f));
+        autoNav.AddTask(new MovementTask(1300, 10, 0, 0.8f));
         autoNav.AddTask(new ArmTask(1200, RobotConfig.intakeSpeed));
         //autoNav.AddTask(new WaitTask(2500));
         autoNav.AddTask(new toDistanceTask(100, 0.7f));
@@ -170,7 +175,7 @@ public class PlacePickupPlaceStraightPathRed extends AutoBase {
 
         autoNav.AddTask(new ArmTask(1200, null));
         autoNav.AddTask(new MovementTask(1300, -90, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(950,1, -1f));
+        autoNav.AddTask(new MovementTask(925,1, -1f));
     }
     public void PickupFar() {
         telemetry.log().add("started PICKUP");
