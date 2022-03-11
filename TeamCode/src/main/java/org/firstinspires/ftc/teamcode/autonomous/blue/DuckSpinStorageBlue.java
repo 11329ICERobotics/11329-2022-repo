@@ -79,12 +79,12 @@ public class DuckSpinStorageBlue extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, RobotConfig.intakeSpeed));
         autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(2750, 90, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(575, 0, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(5500, 90, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(300, 0, 0, 0.25f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, 0.0));
-        autoNav.AddTask(new MovementTask(575, -180, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(300, -180, 0, 0.25f));
         autoNav.AddTask(new MovementTask(3000, -90, 0, 0.5f));
     }
 
@@ -92,7 +92,7 @@ public class DuckSpinStorageBlue extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, RobotConfig.intakeSpeed));
         autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(2750, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(5500, 90, 0, 0.25f));
         autoNav.AddTask(new MovementTask(800, 0, 0, 0.25f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontSecond, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
@@ -105,7 +105,7 @@ public class DuckSpinStorageBlue extends AutoBase {
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, RobotConfig.intakeSpeed));
         autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
-        autoNav.AddTask(new MovementTask(2750, 90, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(5500, 90, 0, 0.25f));
         autoNav.AddTask(new MovementTask(1300, 0, 0, 0.25f));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));

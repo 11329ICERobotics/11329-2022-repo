@@ -72,7 +72,7 @@ public class  RobotConfig {
 
         public static int frontFirst = 1360;
         public static int frontSecond = 1650;
-        public static int frontThird = 1850;
+        public static int frontThird = 1964;
 
         public static int backFirst = 686;
         public static int backSecond = 0;

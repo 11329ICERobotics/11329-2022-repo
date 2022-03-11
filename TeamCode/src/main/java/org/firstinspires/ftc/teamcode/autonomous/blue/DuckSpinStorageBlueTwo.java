@@ -14,11 +14,11 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReleaseIntakeTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 
-@Autonomous(name="Duck Spin Park Storage Red Two", group="Red")
+@Autonomous(name="Capper TEST (DO NOT RUN)", group="Red")
 public class DuckSpinStorageBlueTwo extends AutoBase {
     @Override
     public void Run() {
-        autoNav.AddTask(new CappingTask(0.5, 15000, 0, 1000));
+        autoNav.AddTask(new CappingTask(0.679, 39090, -0.1, 1000));
     }
 
 

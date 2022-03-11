@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.commands.autonav.tasks;
 
+import org.firstinspires.ftc.teamcode.RobotConfig;
 import org.firstinspires.ftc.teamcode.commands.autonav.AutoNav;
 import org.firstinspires.ftc.teamcode.commands.autonav.Task;
 import org.firstinspires.ftc.teamcode.utilities.di.DiContainer;
@@ -25,6 +26,7 @@ public class CappingTask extends Task {
     public void Begin() {
         startTime = System.currentTimeMillis();
         autoNav.capper.yawPosition =yawAngle;
+        autoNav.arm.targetPosition = RobotConfig.ArmPresets.backThird;
 
     }
 
@@ -48,7 +50,11 @@ public class CappingTask extends Task {
         }
 
         if(now >= startTime + pitchTime && distanceMet){
+            autoNav.capper.setPitchMovement(0.0);
             return true;
+        }
+        else if(now >= startTime + pitchTime){
+            autoNav.capper.setPitchMovement(0.0);
         }
         else{
             autoNav.capper.setPitchMovement(pitchPower);

@@ -74,7 +74,7 @@ public class BarcodePipeline extends OpenCvPipeline {
             Core.bitwise_or(redtmp1, redtmp2, thresholded);
         } else {
             //Core.inRange(cropped, new Scalar(186, 60, 67), new Scalar(), thresholded);
-            Core.inRange(cropped, new Scalar(100, 70, 100), new Scalar(120, 255, 255), thresholded);
+            Core.inRange(cropped, new Scalar(100, 150, 100), new Scalar(120, 245, 255), thresholded);
         }
 
         leftThird = thresholded.colRange(0, thresholded.cols() / 3);
