@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReadBarcodeTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReleaseIntakeTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
-
+//WareHouse Untested
 @Autonomous(name="Duck Spin Park Warehouse Red", group="Red")
 public class DuckSpinWarehouseRed extends AutoBase {
     @Override
@@ -51,10 +51,9 @@ public class DuckSpinWarehouseRed extends AutoBase {
     }
 
     public void SpinDuck() {
-        autoNav.AddTask(new MovementTask(1250,-1, 0.5f));
         autoNav.AddTask(new ArmTask(1000, null));
-        autoNav.AddTask(new MovementTask(2750, -90, 0, 0.5f));
-        autoNav.AddTask(new MovementTask(4000, 180, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(5000, 260, -0.5f, 0.25f));
+        autoNav.AddTask(new MovementTask(1000, 180, 0, 0.25f));
         autoNav.AddTask(new DuckSpinTask(true));
         autoNav.AddTask(new MovementTask(RobotConfig.msForOneDuckSpin, 180, 0, 0.01f));
         autoNav.AddTask(new DuckSpinTask(false));
