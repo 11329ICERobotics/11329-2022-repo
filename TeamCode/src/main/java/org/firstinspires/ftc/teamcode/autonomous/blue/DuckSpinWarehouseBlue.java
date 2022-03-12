@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.commands.autonav.tasks.ReleaseIntakeTask;
 import org.firstinspires.ftc.teamcode.commands.autonav.tasks.WaitTask;
 import org.firstinspires.ftc.teamcode.utilities.RobotSide;
 //WareHouse Untested
-@Autonomous(name="Duck Spin Park Warehouse Blue", group="BLue")
+@Autonomous(name="Duck Spin Park Warehouse Blue", group="Blue")
 public class DuckSpinWarehouseBlue extends AutoBase {
     @Override
     public void Run() {
@@ -52,27 +52,30 @@ public class DuckSpinWarehouseBlue extends AutoBase {
 
     public void SpinDuck() {
         autoNav.AddTask(new ArmTask(1000, null));
-        autoNav.AddTask(new MovementTask(1600, -260, 0.5f, 1f));
-        autoNav.AddTask(new MovementTask(300, -180, 0, 1f));
+        autoNav.AddTask(new MovementTask(750, 90, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(2000, 180, 0, 0.25f));
+
         autoNav.AddTask(new DuckSpinTask(true));
-        autoNav.AddTask(new MovementTask(RobotConfig.msForOneDuckSpin, -180, 0, 0.05f));
+        autoNav.AddTask(new MovementTask(RobotConfig.msForOneDuckSpin, 180, 0, 0.01f));
         autoNav.AddTask(new DuckSpinTask(false));
-        autoNav.AddTask(new MovementTask(2500, -90, 0, 1f));
-        autoNav.AddTask(new MovementTask(1250,-1, 0.5f));
-        autoNav.AddTask(new MovementTask(1500, 0, 0, 1f));
+
+        autoNav.AddTask(new MovementTask(2000, 0, 0, 0.5f));
+        autoNav.AddTask(new MovementTask(1000, 270, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(4250, 0, 0, 0.5f));
     }
 
     public void FirstPosition() {
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, RobotConfig.intakeSpeed));
         autoNav.AddTask(new WaitTask(500));
         autoNav.AddTask(new ArmTask(null, 0.0));
         autoNav.AddTask(new MovementTask(6000, 90, 0, 0.25f));
         autoNav.AddTask(new MovementTask(500, -90, 0, 0.25f));
-        autoNav.AddTask(new MovementTask(700, 0, 0, 0.25f));
+        autoNav.AddTask(new MovementTask(675, 0, 0, 0.25f));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, 0.0));
         autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, -RobotConfig.outtakeSpeed));
         autoNav.AddTask(new WaitTask(2000));
-        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontThird, 0.0));
-        autoNav.AddTask(new MovementTask(700, -180, 0, 0.25f));
+
+        autoNav.AddTask(new MovementTask(675, -180, 0, 0.25f));
+        autoNav.AddTask(new ArmTask(RobotConfig.ArmPresets.frontFirst, 0.0));
         autoNav.AddTask(new MovementTask(2850, -90, 0, 0.5f));
     }
 
